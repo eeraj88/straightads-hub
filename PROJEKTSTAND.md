@@ -1,8 +1,9 @@
 # Projektstand: StraightAds Technical SEO & Conversion Intelligence Hub
 
-**Version:** v11.3 (Production-Ready Hub & 3-Zonen-Architektur)  
+**Version:** v11.3 (GitHub Synced & Production-Ready)  
 **Stand:** 19. August 2026  
 **Zielverzeichnis:** `C:\Users\eeraj\Documents\PROJEKTE\StraightAds`  
+**GitHub Repository:** `https://github.com/eeraj88/straightads-hub` (Branch: `main`)  
 **Entwickler:** Eeraj Jan  
 **Agentur-Kontext:** StraightAds Marketing GmbH (Mainz)  
 **Kernversprechen:** *„Klarheit. Geschwindigkeit. Ergebnisse. | Go-Live in 14 Tagen“*
@@ -11,7 +12,12 @@
 
 ## 🎯 Zusammenfassung des Entwicklungsstands
 
-Die Anwendung ist zu **100 % fertiggestellt, getestet und einsatzbereit**. Alle 7 Reiter wurden auf die abgestimmte, harmonisierte **3-Zonen-Architektur** gehoben, alle Backend-Pipelines (PageSpeed API, Serper.dev Google-Live-Suche, ScreenshotAPI.to Full-Page Capture, BeautifulSoup DOM-Scraper) sind live angebunden.
+Die Anwendung ist zu **100 % fertiggestellt, getestet und im GitHub-Repository synchronisiert**. 
+
+* Alle **7 Reiter** folgen der harmonisierten **3-Zonen-Architektur**.
+* Die **Verkaufspsychologie-Engine** arbeitet zu 100 % dynamisch ohne starre `if/else`-Branchenschubladen und passt alle Hebel (BJ-Fogg, Von-Restorff, Verlust-Trigger, 2-Klick Journey) exakt auf das gecrawlte Firmenangebot an.
+* **Sicherheit:** Alle sensiblen Secrets (API-Keys) wurden aus dem Quellcode isoliert und laufen sicher über `get_secret()` mit lokaler `.streamlit/secrets.toml` und `.gitignore`-Schutz.
+* **Nächster Schritt:** Live-Deployment auf Streamlit Community Cloud (geplant für morgen).
 
 ---
 
@@ -44,7 +50,7 @@ Die Anwendung ist zu **100 % fertiggestellt, getestet und einsatzbereit**. Alle 
   - `[ 01 ] DIE 3 SÄULEN DER CONVERSION-PSYCHOLOGIE` (Motivation, Ability, Trigger: Ist vs. Hebel).
   - `[ 02 ] 3 SPEZIFISCHE HEADLINE-HOOKS` (Nutzen-Optionen).
   - `[ 03 ] BUTTON-OPTIMIERUNG` (Side-by-side Vorher-Nachher CTA-Vergleich).
-  - `[ 04 ] STRAIGHTADS MARKETING BRAIN • ANGEWANDTE NEURO-PSYCHOLOGIE` (Dynamische Praxis-Hebel für die gescannte Firma nach BJ-Fogg, Von-Restorff, Verlust-Trigger & 2-Klick Journey).
+  - `[ 04 ] STRAIGHTADS MARKETING BRAIN • ANGEWANDTE NEURO-PSYCHOLOGIE` (100% dynamische Praxis-Hebel für die gescannte Firma nach BJ-Fogg, Von-Restorff, Verlust-Trigger & 2-Klick Journey).
 * **ZONE 3 (Abschluss):** `STRAIGHTADS EXPERTEN-EMPFEHLUNG: VERKAUFSPSYCHOLOGIE & CRO`.
 
 ### REITER 5: ROI- & Hebel-Rechner
@@ -69,9 +75,13 @@ Die Anwendung ist zu **100 % fertiggestellt, getestet und einsatzbereit**. Alle 
 
 ---
 
-## 💻 Ausführung & Testing
+## 💻 Ausführung
 
+### Lokal starten:
 ```powershell
 python -m streamlit run app.py
 ```
 *(Oder per Doppelklick auf `run_app.bat`)*
+
+### Cloud-Deployment (Morgen):
+Über [share.streamlit.io](https://share.streamlit.io) mit GitHub-Repo `eeraj88/straightads-hub` verbinden.
