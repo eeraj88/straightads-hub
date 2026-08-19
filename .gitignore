@@ -1,0 +1,14 @@
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.env
+.venv/
+env/
+venv/
+scratch/
+.streamlit/secrets.toml
+secrets.toml
+logo/*.png
+logo/*.jpg
+logo/*.gif
