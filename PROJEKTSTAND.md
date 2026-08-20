@@ -1,6 +1,6 @@
 # Projektstand: StraightAds Technical SEO & Conversion Intelligence Hub
 
-**Version:** v12.0 (High-End Design System & Refactoring abgeschlossen)  
+**Version:** v12.1 (Production-Ready • Multi-Engine Screenshots & Dark Theme Refinement)  
 **Stand:** 20. August 2026  
 **Zielverzeichnis:** `C:\Users\eeraj\Documents\PROJEKTE\StraightAds`  
 **GitHub Repository:** `https://github.com/eeraj88/straightads-hub` (Branch: `main`)  
@@ -17,9 +17,10 @@ Die Anwendung wurde umfassend refaktoriert, visuell harmonisiert und für den pr
 * **Zentrales Single-Column Layout:** Durchgängige, zentrierte `max-width: 880px` Container-Führung ohne unruhige oder überlappende Spaltenlayouts.
 * **Card-Navigation:** Alle 7 Hauptreiter besitzen ein klares Kärtchen-Design mit sichtbarem Rahmen (`1.5px solid #28303F`), Hover-Elevation (`translateY(-2px)`) und aktivem StraightAds Brand Lime Glow (`#C8D400`).
 * **Icon- und Typografie-Sicherheit:** Bereinigung aller Font-Ligatur-Konflikte (Streamlit Material Icons & Häkchen rendern nativ) und vollständige Emoji-Bereinigung durch professionelle typografische Dash-Indikatoren (`—`).
-* **Automatisierte Cookie-Banner-Unterdrückung:** Die integrierte Multi-Engine-Screenshot-Architektur (Playwright Headless + CSS-Injektion + ScreenshotAPI.to) blendet Consent-Banner (OneTrust, Cookiebot, Borlabs, Usercentrics) automatisch aus und liefert saubere First-Fold-Snapshots.
+* **Multi-Engine-Screenshot-Architektur:** Robuste 5-Stufen-Kaskade mit **ScreenshotAPI.to** (primär mit API-Key), **Thum.io Instant Engine** (100% Cloud-Backup ohne API-Key/Binaries), **Playwright Headless** (Cookie-Banner-Unterdrückung lokal/Container) und **WordPress mshots** (mit Retry).
+* **Sidebar & Input-Refinement:** Domain-Eingabefeld in edlem, leicht aufgehelltem Dark-Slate (`#1E2532`) mit Lime-Fokus (`#C8D400`) und neutralem Platzhalter `domain.de`.
 * **Score-Animation & Ampel-Logik:** Der Conversion Health Score besitzt eine flüssige SVG-Ladeanimation (`stroke-dashoffset`) und dynamische Ampel-Farbcodierung (Grün `#C8D400`, Orange `#FFA500`, Rot `#FF4B4B`).
-* **Dark-Theme ROI-Rechner:** Zahlenfelder in dunkler Ästhetik (`#14181F`), Slider in Brand Lime (`#C8D400`) und durchgängig deutsches Währungs- und Zahlenformat (z. B. `+ 18.000,00 EUR`).
+* **Dark-Theme ROI-Rechner:** Zahlenfelder in dunkler Ästhetik (`#161B24`), Slider in Brand Lime (`#C8D400`) und durchgängig deutsches Währungs- und Zahlenformat (z. B. `+ 18.000,00 EUR`).
 * **Intelligente Text-Normalisierung:** Behebt fehlende Leerzeichen bei HTML-Tag-Übergängen (z. B. `"Revenue Growth MIT Straight Ads"`), schützt deutsche Rechtsformen wie `"GmbH"`.
 
 ---

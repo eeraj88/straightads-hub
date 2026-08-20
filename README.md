@@ -1,4 +1,4 @@
-# StraightAds Performance Marketing | Sales Intelligence & Marketing Brain Hub v12.0
+# StraightAds Performance Marketing | Sales Intelligence & Marketing Brain Hub v12.1
 
 > **Agentur-Kontext:** Performance-Marketing-Agentur **StraightAds Marketing GmbH** (Mainz)  
 > **Kernversprechen:** *„Klarheit. Geschwindigkeit. Ergebnisse. | Go-Live in 14 Tagen“*  
@@ -10,7 +10,7 @@
 
 Der **StraightAds Technical SEO & Conversion Intelligence Hub** ist eine High-End B2B Sales Intelligence Anwendung für die gezielte Vorbereitung und Durchführung von Conversion-Sales-Calls. 
 
-Durch die nahtlose Verknüpfung von technischem On-Page-Scraping (Google PageSpeed Vitals, Serper.dev Google-Live-Index, automatisierte Playwright/ScreenshotAPI Headless-Screenshots) mit den 23 Fachmodulen des **StraightAds Marketing Brain** liefert das Tool in Sekunden maßgeschneiderte Hebel, fundierte psychologische Optimierungen und praxiserprobte Vertriebs-Assets für jeden Interessenten.
+Durch die nahtlose Verknüpfung von technischem On-Page-Scraping (Google PageSpeed Vitals, Serper.dev Google-Live-Index, Multi-Engine Screenshot-Architektur mit ScreenshotAPI.to & Cloud-Backups) mit den 23 Fachmodulen des **StraightAds Marketing Brain** liefert das Tool in Sekunden maßgeschneiderte Hebel, fundierte psychologische Optimierungen und praxiserprobte Vertriebs-Assets für jeden Interessenten.
 
 ---
 
@@ -37,7 +37,7 @@ Sobald die App auf [share.streamlit.io](https://share.streamlit.io) mit dem GitH
 1. **Änderungen pushen:**
    ```powershell
    git add .
-   git commit -m "feat: StraightAds Sales Intelligence Hub v12.0"
+   git commit -m "feat: StraightAds Sales Intelligence Hub v12.1"
    git push origin main
    ```
 2. **Automatische Aktualisierung:**  
