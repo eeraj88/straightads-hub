@@ -626,40 +626,47 @@ def show_site_modal(image_bytes: bytes, domain: str, url: str):
 
 
 def fetch_fullpage_screenshot(target_url: str) -> bytes:
+    """
+    Erstellt zuverlässig einen hochauflösenden Website-Screenshot.
+    Multi-Engine Kaskade: Cloud High-Speed Engine (mshots) -> ScreenshotAPI -> Lokaler Headless-Browser -> Microlink.
+    """
     clean_url = target_url.strip()
     if not clean_url.startswith(('http://', 'https://')):
         clean_url = 'https://' + clean_url
 
-    api_url = "https://screenshotapi.to/api/v1/screenshot"
-    headers = {
-        "x-api-key": SCREENSHOTAPI_KEY
-    }
-    
-    # CSS-Unlock für reguläre Animationen & UIkit-Scrollspy
-    css_unlock = (
-        "* { opacity: 1 !important; visibility: visible !important; transform: none !important; animation: none !important; transition: none !important; } "
-        "[uk-scrollspy], .uk-scrollspy-inview { opacity: 1 !important; transform: none !important; visibility: visible !important; }"
-    )
+    # 1. Cloud High-Speed Engine (mshots, 1440px High-Res, 100% cloud-tauglich)
+    for attempt in range(2):
+        try:
+            r = requests.get(f'https://s.wordpress.com/mshots/v1/{clean_url}?w=1440', timeout=7)
+            if r.status_code == 200 and len(r.content) > 10000 and not r.content.startswith(b'GIF'):
+                return r.content
+            time.sleep(1.2)
+        except Exception:
+            pass
 
-    params = {
-        "url": clean_url,
-        "type": "png",
-        "fullPage": "true",
-        "scrollToBottom": "true",
-        "delay": "3000",
-        "blockCookieBanners": "true",
-        "css": css_unlock,
-        "output": "image"
-    }
+    # 2. ScreenshotAPI.to (sofern API-Key hinterlegt)
+    if SCREENSHOTAPI_KEY:
+        try:
+            api_url = "https://screenshotapi.to/api/v1/screenshot"
+            headers = {"x-api-key": SCREENSHOTAPI_KEY}
+            css_unlock = "* { opacity: 1 !important; visibility: visible !important; transform: none !important; animation: none !important; transition: none !important; }"
+            params = {
+                "url": clean_url,
+                "type": "png",
+                "fullPage": "true",
+                "scrollToBottom": "true",
+                "delay": "2000",
+                "blockCookieBanners": "true",
+                "css": css_unlock,
+                "output": "image"
+            }
+            resp = requests.get(api_url, headers=headers, params=params, timeout=10)
+            if resp.status_code == 200 and len(resp.content) > 10000 and not resp.content.startswith(b'GIF'):
+                return resp.content
+        except Exception:
+            pass
 
-    try:
-        resp = requests.get(api_url, headers=headers, params=params, timeout=30)
-        if resp.status_code == 200 and len(resp.content) > 5000:
-            return resp.content
-    except Exception:
-        pass
-        
-    # 2. Fallback: Lokaler Headless-Browser
+    # 3. Lokaler Headless-Browser (für lokale Windows-Umgebungen)
     browser_paths = [
         r'C:\Program Files\Google\Chrome\Application\chrome.exe',
         r'C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe',
@@ -677,12 +684,12 @@ def fetch_fullpage_screenshot(target_url: str) -> bytes:
                 '--disable-gpu',
                 '--no-sandbox',
                 '--hide-scrollbars',
-                '--window-size=1280,2800',
+                '--window-size=1280,2400',
                 f'--screenshot={tmp_png}',
                 clean_url
             ]
             try:
-                res = subprocess.run(cmd, capture_output=True, text=True, timeout=18)
+                res = subprocess.run(cmd, capture_output=True, text=True, timeout=15)
                 if res.returncode == 0 and os.path.exists(tmp_png) and os.path.getsize(tmp_png) > 10000:
                     with open(tmp_png, 'rb') as f:
                         content = f.read()
@@ -695,16 +702,16 @@ def fetch_fullpage_screenshot(target_url: str) -> bytes:
             except Exception:
                 pass
             break
-            
-    # 3. Fallback: Microlink API
+
+    # 4. Fallback: Microlink API
     try:
         micro_url = f"https://api.microlink.io/?url={clean_url}&screenshot=true&embed=screenshot.url"
-        resp = requests.get(micro_url, timeout=12)
+        resp = requests.get(micro_url, timeout=10)
         if resp.status_code == 200 and len(resp.content) > 10000 and not resp.content.startswith(b'GIF'):
             return resp.content
     except Exception:
         pass
-        
+
     return None
 
 
