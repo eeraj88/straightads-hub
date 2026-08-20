@@ -772,21 +772,30 @@ def fetch_fullpage_screenshot(target_url: str) -> bytes:
     """
     Erstellt zuverlässig einen sauberen, hochauflösenden Website-Screenshot
     ohne störende Cookie-Banner oder Overlays.
-    Multi-Engine Kaskade: Playwright Headless (Cookie-Blocked) -> ScreenshotAPI -> mshots -> Microlink.
+    Multi-Engine Kaskade: 
+    1. Playwright Headless (Cookie-Free)
+    2. Thum.io Instant High-Res Engine (100% Cloud-tauglich)
+    3. ScreenshotAPI.to Cloud Engine
+    4. WordPress mshots Engine (mit Auto-Retry)
+    5. Microlink Fallback
     """
     clean_url = target_url.strip()
     if not clean_url.startswith(('http://', 'https://')):
         clean_url = 'https://' + clean_url
 
-    # 1. Playwright Headless Engine mit Cookie-Banner-Unterdrückung
+    # 1. Playwright Headless Engine mit Cookie-Banner-Unterdrückung (lokal & Container)
     try:
         from playwright.sync_api import sync_playwright
         with sync_playwright() as p:
-            browser = p.chromium.launch(channel="msedge", headless=True)
+            try:
+                browser = p.chromium.launch(headless=True)
+            except Exception:
+                browser = p.chromium.launch(channel="msedge", headless=True)
+                
             page = browser.new_page(viewport={"width": 1360, "height": 1900})
-            page.goto(clean_url, timeout=14000, wait_until="domcontentloaded")
-            time.sleep(1.2)
-            # Cookie Banner CSS entfernen
+            page.goto(clean_url, timeout=12000, wait_until="domcontentloaded")
+            time.sleep(1.0)
+            # Cookie Banner & Overlays via CSS unterdrücken
             page.add_style_tag(content="""
                 #onetrust-consent-sdk, #CybotCookiebotDialog, #usercentrics-root, 
                 .cookie-banner, .cookie-modal, [id*="cookie" i], [class*="cookie" i], 
@@ -808,7 +817,7 @@ def fetch_fullpage_screenshot(target_url: str) -> bytes:
                         break
                 except Exception:
                     pass
-            time.sleep(0.8)
+            time.sleep(0.6)
             shot = page.screenshot(full_page=False)
             browser.close()
             if shot and len(shot) > 10000:
@@ -816,40 +825,47 @@ def fetch_fullpage_screenshot(target_url: str) -> bytes:
     except Exception:
         pass
 
-    # 2. ScreenshotAPI.to (sofern API-Key hinterlegt)
-    if SCREENSHOTAPI_KEY:
-        try:
-            api_url = "https://screenshotapi.to/api/v1/screenshot"
-            headers = {"x-api-key": SCREENSHOTAPI_KEY}
-            css_unlock = "* { opacity: 1 !important; visibility: visible !important; } #onetrust-consent-sdk, [class*='cookie'], [id*='cookie'] { display: none !important; }"
-            params = {
-                "url": clean_url,
-                "type": "png",
-                "fullPage": "true",
-                "scrollToBottom": "true",
-                "delay": "2000",
-                "blockCookieBanners": "true",
-                "css": css_unlock,
-                "output": "image"
-            }
-            resp = requests.get(api_url, headers=headers, params=params, timeout=10)
-            if resp.status_code == 200 and len(resp.content) > 10000 and not resp.content.startswith(b'GIF'):
-                return resp.content
-        except Exception:
-            pass
-
-    # 3. Fallback: Cloud High-Speed Engine (mshots)
+    # 2. Thum.io Instant High-Res Engine (100% Cloud-tauglich für Streamlit Cloud)
     try:
-        r = requests.get(f'https://s.wordpress.com/mshots/v1/{clean_url}?w=1440', timeout=7)
+        thum_url = f"https://image.thum.io/get/width/1360/crop/850/noanimate/{clean_url}"
+        r = requests.get(thum_url, timeout=9)
         if r.status_code == 200 and len(r.content) > 10000 and not r.content.startswith(b'GIF'):
             return r.content
     except Exception:
         pass
 
-    # 4. Fallback: Microlink API
+    # 3. ScreenshotAPI.to (sofern API-Key hinterlegt)
+    if SCREENSHOTAPI_KEY:
+        try:
+            api_url = "https://screenshotapi.to/api/v1/screenshot"
+            headers = {"x-api-key": SCREENSHOTAPI_KEY}
+            params = {
+                "url": clean_url,
+                "type": "png",
+                "output": "image",
+                "blockCookieBanners": "true",
+                "delay": "1000"
+            }
+            resp = requests.get(api_url, headers=headers, params=params, timeout=8)
+            if resp.status_code == 200 and len(resp.content) > 10000 and not resp.content.startswith(b'GIF'):
+                return resp.content
+        except Exception:
+            pass
+
+    # 4. WordPress mshots Engine (mit Auto-Retry)
+    for _ in range(2):
+        try:
+            r = requests.get(f"https://s.wordpress.com/mshots/v1/{clean_url}?w=1360", timeout=7)
+            if r.status_code == 200 and len(r.content) > 10000 and not r.content.startswith(b'GIF'):
+                return r.content
+            time.sleep(1.0)
+        except Exception:
+            pass
+
+    # 5. Microlink API Fallback
     try:
         micro_url = f"https://api.microlink.io/?url={clean_url}&screenshot=true&embed=screenshot.url"
-        resp = requests.get(micro_url, timeout=10)
+        resp = requests.get(micro_url, timeout=8)
         if resp.status_code == 200 and len(resp.content) > 10000 and not resp.content.startswith(b'GIF'):
             return resp.content
     except Exception:
