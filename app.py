@@ -248,12 +248,28 @@ st.markdown("""
         margin-bottom: 8px;
     }
     
-    /* Dark Theme Inputs für Text, Number & Selects */
-    .stTextInput input, 
+    /* Eingabefelder für Text & Domains in angenehm sichtbarem, etwas hellerem Dark-Ton */
+    .stTextInput input {
+        background-color: #1E2532 !important;
+        border: 1.5px solid #3B4758 !important;
+        color: #FFFFFF !important;
+        border-radius: 6px !important;
+        font-size: 0.95rem !important;
+        font-weight: 600 !important;
+        padding: 10px 14px !important;
+        box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.25) !important;
+    }
+
+    .stTextInput input:focus {
+        border-color: #C8D400 !important;
+        background-color: #232B3A !important;
+        box-shadow: 0 0 12px rgba(200, 212, 0, 0.35) !important;
+    }
+
     .stNumberInput input, 
     .stSelectbox select {
-        background-color: #14181F !important;
-        border: 1.5px solid #28303F !important;
+        background-color: #161B24 !important;
+        border: 1.5px solid #2D3645 !important;
         color: #FFFFFF !important;
         border-radius: 6px !important;
         font-size: 0.94rem !important;
@@ -1519,7 +1535,7 @@ st.sidebar.markdown("""
 
 target_url_input = st.sidebar.text_input(
     "Website-Domain eingeben:",
-    placeholder="z.B. baeckerei-liebenstein.de",
+    placeholder="domain.de",
     help="Tragen Sie eine beliebige Kunden-Domain für das Live-Audit ein."
 )
 
