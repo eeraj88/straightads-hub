@@ -1,7 +1,7 @@
 # Projektstand: StraightAds Technical SEO & Conversion Intelligence Hub
 
-**Version:** v11.3 (GitHub Synced & Production-Ready)  
-**Stand:** 19. August 2026  
+**Version:** v12.0 (High-End Design System & Refactoring abgeschlossen)  
+**Stand:** 20. August 2026  
 **Zielverzeichnis:** `C:\Users\eeraj\Documents\PROJEKTE\StraightAds`  
 **GitHub Repository:** `https://github.com/eeraj88/straightads-hub` (Branch: `main`)  
 **Entwickler:** Eeraj Jan  
@@ -12,76 +12,69 @@
 
 ## 🎯 Zusammenfassung des Entwicklungsstands
 
-Die Anwendung ist zu **100 % fertiggestellt, getestet und im GitHub-Repository synchronisiert**. 
+Die Anwendung wurde umfassend refaktoriert, visuell harmonisiert und für den produktiven Einsatz optimiert:
 
-* Alle **7 Reiter** folgen der harmonisierten **3-Zonen-Architektur**.
-* Die **Verkaufspsychologie-Engine** arbeitet zu 100 % dynamisch ohne starre `if/else`-Branchenschubladen und passt alle Hebel (BJ-Fogg, Von-Restorff, Verlust-Trigger, 2-Klick Journey) exakt auf das gecrawlte Firmenangebot an.
-* **Sicherheit:** Alle sensiblen Secrets (API-Keys) wurden aus dem Quellcode isoliert und laufen sicher über `get_secret()` mit lokaler `.streamlit/secrets.toml` und `.gitignore`-Schutz.
-* **Nächster Schritt:** Live-Deployment auf Streamlit Community Cloud (geplant für morgen).
+* **Zentrales Single-Column Layout:** Durchgängige, zentrierte `max-width: 880px` Container-Führung ohne unruhige oder überlappende Spaltenlayouts.
+* **Card-Navigation:** Alle 7 Hauptreiter besitzen ein klares Kärtchen-Design mit sichtbarem Rahmen (`1.5px solid #28303F`), Hover-Elevation (`translateY(-2px)`) und aktivem StraightAds Brand Lime Glow (`#C8D400`).
+* **Icon- und Typografie-Sicherheit:** Bereinigung aller Font-Ligatur-Konflikte (Streamlit Material Icons & Häkchen rendern nativ) und vollständige Emoji-Bereinigung durch professionelle typografische Dash-Indikatoren (`—`).
+* **Automatisierte Cookie-Banner-Unterdrückung:** Die integrierte Multi-Engine-Screenshot-Architektur (Playwright Headless + CSS-Injektion + ScreenshotAPI.to) blendet Consent-Banner (OneTrust, Cookiebot, Borlabs, Usercentrics) automatisch aus und liefert saubere First-Fold-Snapshots.
+* **Score-Animation & Ampel-Logik:** Der Conversion Health Score besitzt eine flüssige SVG-Ladeanimation (`stroke-dashoffset`) und dynamische Ampel-Farbcodierung (Grün `#C8D400`, Orange `#FFA500`, Rot `#FF4B4B`).
+* **Dark-Theme ROI-Rechner:** Zahlenfelder in dunkler Ästhetik (`#14181F`), Slider in Brand Lime (`#C8D400`) und durchgängig deutsches Währungs- und Zahlenformat (z. B. `+ 18.000,00 EUR`).
+* **Intelligente Text-Normalisierung:** Behebt fehlende Leerzeichen bei HTML-Tag-Übergängen (z. B. `"Revenue Growth MIT Straight Ads"`), schützt deutsche Rechtsformen wie `"GmbH"`.
 
 ---
 
-## 🏛️ Detaillierter Aufbau aller 7 Reiter (3-Zonen-Architektur)
+## 🏛️ Detaillierter Aufbau aller 7 Reiter
 
 ### REITER 1: SEO- & DOM-Strukturanalyse
-* **ZONE 1 (Hero / First Fold):** 3 Status-Pills (`Meta-Tags: Optimal`, `H1-Hierarchie: 1 H1`, `Einstiegshürde: X Felder`) + Google SERP Simulator (Desktop & Mobile Preview).
-* **ZONE 2 (Detail-Ebene):** 
-  - `[ 01 ] META-TAGS & ON-PAGE SIGNALE` (Längen-Check, Zeichenzähler & H1-Führung).
-  - `[ 02 ] DOM & CONVERSION-HÜRDE` (Isolierte CTAs, Formularfelder, Trust-Signale & Quelltext-Dropdown).
-* **ZONE 3 (Abschluss):** `STRAIGHTADS EXPERTEN-EMPFEHLUNG: STRUKTUR & TECHNIK` (Dunkle Box `#14181F` mit `2px solid #C8D400` Lime-Border).
+* **Stat-Pill-Leiste:** 1-reihige, kompakte Statusanzeige (`Meta-Tags`, `H1-Hierarchie`, `Einstiegs-Hürde`).
+* **Google SERP Simulator:** Authentische Google Desktop- & Mobile-Suchergebnisvorschau.
+* **[ 01 ] Meta-Tags & On-Page Signale:** Zeichenzähler, Meta-Description & H1-Führung.
+* **[ 02 ] DOM & Conversion-Hürde:** Erkannte Formularfelder, Trust-Signale & entkoppelter Button-Quelltext-Expander ohne Überlappung.
+* **Abschluss:** StraightAds Experten-Empfehlung (Struktur & Technik).
 
 ### REITER 2: Keyword- & Live-Ranking-Audit
-* **ZONE 1 (Hero / First Fold):** Live-Ranking Power-Card (Google SERP Live-Position in Neon-Lime `#C8D400` oder Such-Alert in `#FFA500`).
-* **ZONE 2 (Detail-Ebene):**
-  - `[ 01 ] TOP 5 ON-PAGE THEMEN & RELEVANZ` (Schlanke, linksbündige 5-Row-Tabelle mit Relevanz-Scores).
-  - `[ 02 ] PULL-MARKETING & GOOGLE ADS HEBEL` (Vergleich: Organischer Aufbau vs. Google Ads 14-Tage Speed).
-* **ZONE 3 (Abschluss):** `STRAIGHTADS EXPERTEN-EMPFEHLUNG: GOOGLE ADS & SICHTBARKEIT`.
+* **Google Live-Ranking Power-Card:** Direkte Abfrage der echten Google-Position via Serper.dev API.
+* **[ 01 ] Top 5 On-Page Themen & Relevanz:** Schlanke Tabelle mit Keyword-Dichten und Vorkommen.
+* **[ 02 ] Pull-Marketing & Google Ads Hebel:** Vergleich zwischen organischem Ranking-Aufbau und 14-Tage Google Ads Skalierung.
+* **Abschluss:** StraightAds Experten-Empfehlung (Google Ads & Sichtbarkeit).
 
 ### REITER 3: Design, Farben & UI/UX Vision
-* **ZONE 1 (Hero / First Fold):** First-Fold Snapshot Preview mit Direkteinstieg in das Screenshot-Modal (`[ 🔍 Screenshot im Vollbild-Overlay öffnen ]`).
-* **ZONE 2 (Detail-Ebene):**
-  - `[ 01 ] CI-FARBPALETTE & TYPOGRAFIE` (5 native SVG-Farbfelder mit Monospace-Hexcodes & extrahierte Fonts).
-  - `[ 02 ] MULTIMODALES UI/UX-AUDIT (GEMINI VISION)` (Lesbarkeit, Kontraste, Mobile-Ausrichtung).
-* **ZONE 3 (Abschluss):** `STRAIGHTADS EXPERTEN-EMPFEHLUNG: MARKENAUFTRITT & DESIGN`.
+* **First-Fold Snapshot:** Full-Page Website-Vorschau mit automatischer Cookie-Banner-Bereinigung und Vollbild-Modal.
+* **[ 01 ] CI-Farbpalette & Typografie:** Extrahierte Primärfarben mit Monospace-Hexcodes und Schriftarten.
+* **[ 02 ] Multimodales UI/UX-Audit (Gemini Vision):** KI-Sichtprüfung zu Lesbarkeit, Kontrasten und Mobile-First-Führung.
+* **Abschluss:** StraightAds Experten-Empfehlung (Markenauftritt & Design).
 
-### REITER 4: Verkaufspsychologie (BJ-Fogg Modell & Neuro-Psychologie)
-* **ZONE 1 (Hero / First Fold):** Radial SVG Health Score Tacho (`Grade A/B/C/D`) + Branchen-Einordnung & $B = M \times A \times T$ Leitsatz.
-* **ZONE 2 (Detail-Ebene):**
-  - `[ 01 ] DIE 3 SÄULEN DER CONVERSION-PSYCHOLOGIE` (Motivation, Ability, Trigger: Ist vs. Hebel).
-  - `[ 02 ] 3 SPEZIFISCHE HEADLINE-HOOKS` (Nutzen-Optionen).
-  - `[ 03 ] BUTTON-OPTIMIERUNG` (Side-by-side Vorher-Nachher CTA-Vergleich).
-  - `[ 04 ] STRAIGHTADS MARKETING BRAIN • ANGEWANDTE NEURO-PSYCHOLOGIE` (100% dynamische Praxis-Hebel für die gescannte Firma nach BJ-Fogg, Von-Restorff, Verlust-Trigger & 2-Klick Journey).
-* **ZONE 3 (Abschluss):** `STRAIGHTADS EXPERTEN-EMPFEHLUNG: VERKAUFSPSYCHOLOGIE & CRO`.
+### REITER 4: Verkaufspsychologie (BJ-Fogg & Neuro-Module)
+* **Conversion Health Score & Fogg-Diagnose:** Animierter Radial-Score (`Grade A bis D`), dynamische Ampel-Badges und Fogg-Leitsatz ($B = M \times A \times T$).
+* **[ 01 ] Die 3 Säulen der Conversion-Psychologie:** Motivation, Ability und Trigger als 3 gleichwertige, harmonische Kärtchen nebeneinander im 880px-Grid.
+* **[ 02 ] 3 Spezifische Headline-Hooks:** Nutzen-, Geschwindigkeits- und Vorteilsorientierte Hooks.
+* **[ 03 ] Button-Optimierung:** Vorher-Nachher Vergleich für kaufaktivierende Call-to-Actions.
+* **[ 04 ] Angewandte Neuro-Psychologie:** 4 maßgeschneiderte Praxisbeispiele (BJ-Fogg, Von-Restorff, Verlust-Trigger, 2-Klick Journey).
+* **Abschluss:** StraightAds Experten-Empfehlung (Verkaufspsychologie & CRO).
 
 ### REITER 5: ROI- & Hebel-Rechner
-* **ZONE 1 (Hero / First Fold):** Interaktive Business-Stellschrauben (4 Slider für Traffic, Ist-Conversion-Rate, Auftragswert & Hebel).
-* **ZONE 2 (Detail-Ebene):**
-  - Der finanzielle Jahres-Hebel (`+ X €` zusätzlicher Jahresertrag in `#C8D400` bei 0 € Werbekosten).
-  - Rendite-Matrix (Monatlicher & jährlicher Mehrumsatz, ROI auf Optimierung).
-* **ZONE 3 (Abschluss):** `STRAIGHTADS EXPERTEN-EMPFEHLUNG: WIRTSCHAFTLICHKEIT & SKALIERUNG`.
+* **[ 01 ] Business-Stellschrauben:** Dark-Theme Zahlenfelder und Brand-Lime Slider für Besucher, Abschlussquote, Bonwert und Conversion-Lift.
+* **[ 02 ] Der finanzielle Jahres-Hebel:** Prominente Jahresertrags-Karte (`+ 18.000,00 EUR`) direkt unter den Inputs, monatlicher Mehrumsatz und Neukunden-Zuwachs.
+* **Abschluss:** StraightAds Experten-Empfehlung (Wirtschaftlichkeit & Skalierung).
 
-### REITER 6: Vertriebs-Pitches & Outreach-Vorlagen
-* **ZONE 1 (Hero / First Fold):** Die 2 dominanten Conversion-Hebel im Direkt-Fokus.
-* **ZONE 2 (Detail-Ebene):**
-  - `[ 01 ] 3 PSYCHOLOGISCHE COPYWRITING-FRAMEWORKS` (PAS, BAB, Hook-Story-Offer per Unter-Reiter).
-  - `[ 02 ] TELEFON-LEITFADEN` (Kaltakquise mit Einwandbehandlung & 14-Tage Aufhänger).
-  - `[ 03 ] PERSONALISIERTE E-MAIL-VORLAGE` (Zahnrad-Methode mit 1-Klick Copy-Codebox).
-* **ZONE 3 (Abschluss):** `STRAIGHTADS EXPERTEN-EMPFEHLUNG: VERTRIEBSANSATZ & ABSCHLUSS`.
+### REITER 6: Vertriebs-Pitches & Outreach
+* **Die 2 dominanten Gesprächsaufhänger:** Schmerzpunkte aus dem Audit vs. StraightAds 14-Tage Go-Live-Versprechen.
+* **[ 01 ] 3 Psychologische Copywriting-Frameworks:** PAS, BAB und Hook-Story-Offer per Unter-Reiter.
+* **[ 02 ] Telefon-Leitfaden:** Kaltakquise-Gesprächsführung mit Einwandbehandlung.
+* **[ 03 ] Personalisierte E-Mail-Vorlage:** Direkt kopierbare E-Mail-Vorlage mit 1-Klick Quelltext.
+* **Abschluss:** StraightAds Experten-Empfehlung (Vertriebsansatz & Abschluss).
 
-### REITER 7: JSON-Export & Agentur-Onboarding
-* **ZONE 1 (Hero / First Fold):** CRM & Pipeline-Schnittstelle (HubSpot / Pipedrive 1-Klick Download-Button).
-* **ZONE 2 (Detail-Ebene):**
-  - `[ 01 ] MASCHINENLESBARER AUDIT-DATENSATZ` (Vollständiger JSON-Baum zur Übergabe an Dev- & Media-Teams).
+### REITER 7: Maschinenlesbarer JSON-Export
+* **Strukturierter Audit-Report:** 1-Klick Download-Hub für CRM-Systeme (HubSpot, Pipedrive, Notion).
+* **[ 01 ] Vollständiger JSON-Datensatz:** Vollständiger Audit-Payload für Development- und Marketing-Teams.
 
 ---
 
-## 💻 Ausführung
+## 🚀 Deployment & CI/CD Workflow
 
-### Lokal starten:
-```powershell
-python -m streamlit run app.py
-```
-*(Oder per Doppelklick auf `run_app.bat`)*
-
-### Cloud-Deployment (Morgen):
-Über [share.streamlit.io](https://share.streamlit.io) mit GitHub-Repo `eeraj88/straightads-hub` verbinden.
+### Automatisches Continuous Deployment (Streamlit Community Cloud):
+Sobald das Repository einmalig mit **Streamlit Community Cloud** ([share.streamlit.io](https://share.streamlit.io)) verbunden ist, läuft das Deployment **zu 100 % automatisch**:
+1. Jeder `git push origin main` triggert automatisch einen neuen Build.
+2. Streamlit Cloud zieht die Änderungen, aktualisiert Abhängigkeiten aus `requirements.txt` und schaltet die neue Version innerhalb von 1–2 Minuten live.
+3. **Manuelle Eingriffe sind nach dem Push nicht erforderlich.**

@@ -148,8 +148,13 @@ st.markdown("""
         font-family: 'Ubuntu', sans-serif !important;
     }
     
-    html, body, [class*="css"], .stMarkdown, p, span, div, h1, h2, h3, h4, h5, h6, label {
-        font-family: 'Ubuntu', sans-serif !important;
+    html, body, .stMarkdown, p, h1, h2, h3, h4, h5, h6, label {
+        font-family: 'Ubuntu', -apple-system, BlinkMacSystemFont, sans-serif !important;
+    }
+    
+    /* Preserve Streamlit Material Icons font */
+    [data-testid="stIcon"], .material-symbols-rounded, .material-icons, [class*="material-symbols"] {
+        font-family: "Material Symbols Rounded", "Material Icons", sans-serif !important;
     }
     
     p, span, li {
@@ -161,10 +166,12 @@ st.markdown("""
     }
     
     .block-container {
-        padding-top: 0rem !important;
-        padding-left: 2rem !important;
-        padding-right: 2rem !important;
-        max-width: 100% !important;
+        padding-top: 1rem !important;
+        padding-left: 1.5rem !important;
+        padding-right: 1.5rem !important;
+        padding-bottom: 4rem !important;
+        max-width: 880px !important;
+        margin: 0 auto !important;
     }
     
     header[data-testid="stHeader"] {
@@ -173,12 +180,11 @@ st.markdown("""
     
     .top-navbar {
         background-color: #1A1E24;
-        border-bottom: 1px solid #2D333F;
-        margin-left: -2rem !important;
-        margin-right: -2rem !important;
+        border: 1px solid #2D333F;
+        border-radius: 8px;
         margin-top: 0px !important;
-        margin-bottom: 25px !important;
-        padding: 18px 36px;
+        margin-bottom: 24px !important;
+        padding: 16px 24px;
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -188,17 +194,35 @@ st.markdown("""
     .top-navbar-brand {
         display: flex;
         align-items: center;
-        gap: 22px;
+        gap: 18px;
     }
     
     .top-navbar-tag {
-        font-size: 0.82rem;
+        font-size: 0.80rem;
         color: #A0AAB5;
-        letter-spacing: 2.5px;
+        letter-spacing: 2px;
         text-transform: uppercase;
         font-weight: 500;
         border-left: 1.5px solid #2D333F;
-        padding-left: 20px;
+        padding-left: 16px;
+    }
+
+    /* Kompakte Stat-Pill Zeile für kurze Statuswerte */
+    .stat-pills-row {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 12px;
+        margin-bottom: 18px;
+    }
+
+    .stat-pill-box {
+        background-color: #14181F;
+        border: 1px solid #28303F;
+        border-radius: 6px;
+        padding: 12px 16px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
     }
     
     section[data-testid="stSidebar"] {
@@ -224,23 +248,36 @@ st.markdown("""
         margin-bottom: 8px;
     }
     
+    /* Dark Theme Inputs für Text, Number & Selects */
     .stTextInput input, 
     .stNumberInput input, 
     .stSelectbox select {
-        background-color: #E2E8F0 !important;
-        border: 1.5px solid #CBD5E1 !important;
-        color: #0F172A !important;
+        background-color: #14181F !important;
+        border: 1.5px solid #28303F !important;
+        color: #FFFFFF !important;
         border-radius: 6px !important;
         font-size: 0.94rem !important;
         font-weight: 600 !important;
         padding: 10px 14px !important;
     }
+
+    .stNumberInput button {
+        background-color: #1A202A !important;
+        color: #C8D400 !important;
+        border-color: #28303F !important;
+    }
+
+    .stNumberInput button:hover {
+        background-color: #252D3B !important;
+        color: #FFFFFF !important;
+        border-color: #C8D400 !important;
+    }
     
     .stTextArea textarea {
-        background-color: #E2E8F0 !important;
-        border: 1.5px solid #CBD5E1 !important;
-        color: #0F172A !important;
-        -webkit-text-fill-color: #0F172A !important;
+        background-color: #14181F !important;
+        border: 1.5px solid #28303F !important;
+        color: #FFFFFF !important;
+        -webkit-text-fill-color: #FFFFFF !important;
         border-radius: 6px !important;
         font-size: 0.94rem !important;
         font-weight: 500 !important;
@@ -248,10 +285,10 @@ st.markdown("""
     }
     
     .stTextArea textarea:disabled {
-        background-color: #E2E8F0 !important;
-        color: #0F172A !important;
-        -webkit-text-fill-color: #0F172A !important;
-        opacity: 1 !important;
+        background-color: #14181F !important;
+        color: #A0AAB5 !important;
+        -webkit-text-fill-color: #A0AAB5 !important;
+        opacity: 0.8 !important;
     }
     
     label[data-testid="stWidgetLabel"] p,
@@ -301,6 +338,70 @@ st.markdown("""
         letter-spacing: 0.3px;
     }
     
+    /* Haupt-Reiter als sichtbare Karten mit Rahmen & Hover-Effekt (Universal für alle Streamlit Versionen) */
+    div[data-testid="stTabs"] {
+        margin-top: 10px !important;
+        margin-bottom: 24px !important;
+    }
+    
+    div[data-testid="stTabs"] [role="tablist"],
+    div[data-baseweb="tab-list"] {
+        gap: 8px !important;
+        background-color: transparent !important;
+        border-bottom: 1px solid #28303F !important;
+        padding-bottom: 8px !important;
+        display: flex !important;
+        flex-wrap: wrap !important;
+    }
+    
+    div[data-testid="stTabs"] [role="tab"],
+    div[data-testid="stTabs"] div[data-testid="stTab"],
+    div[data-testid="stTabs"] button[role="tab"],
+    div[data-testid="stTabs"] button[data-baseweb="tab"],
+    button[data-baseweb="tab"] {
+        background-color: #14181F !important;
+        border: 1.5px solid #28303F !important;
+        border-radius: 8px !important;
+        padding: 8px 16px !important;
+        color: #A0AAB5 !important;
+        font-weight: 600 !important;
+        font-size: 0.86rem !important;
+        transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2) !important;
+        height: auto !important;
+        cursor: pointer !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+    
+    div[data-testid="stTabs"] [role="tab"]:hover,
+    div[data-testid="stTabs"] div[data-testid="stTab"]:hover,
+    div[data-testid="stTabs"] button[role="tab"]:hover,
+    button[data-baseweb="tab"]:hover {
+        background-color: #1A202A !important;
+        border-color: #4A5568 !important;
+        color: #FFFFFF !important;
+        transform: translateY(-2px) !important;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35) !important;
+    }
+    
+    div[data-testid="stTabs"] [role="tab"][aria-selected="true"],
+    div[data-testid="stTabs"] div[data-testid="stTab"][aria-selected="true"],
+    div[data-testid="stTabs"] [role="tab"][data-selected="true"],
+    div[data-testid="stTabs"] button[role="tab"][aria-selected="true"],
+    button[data-baseweb="tab"][aria-selected="true"] {
+        background-color: #1B2210 !important;
+        border-color: #C8D400 !important;
+        color: #C8D400 !important;
+        box-shadow: 0 0 14px rgba(200, 212, 0, 0.28) !important;
+    }
+    
+    div[data-baseweb="tab-highlight"],
+    div[data-baseweb="tab-border"] {
+        display: none !important;
+    }
+
     /* Custom Expander & Dropdown Enhancements */
     div[data-testid="stExpander"] {
         background-color: #1A1E24 !important;
@@ -560,30 +661,49 @@ st.markdown("""
     }
     
     .roi-card {
-        background: linear-gradient(135deg, #1A1E24 0%, #232717 100%);
-        border: 1.5px dashed #C8D400;
+        background: linear-gradient(135deg, #161B22 0%, #1F2712 100%);
+        border: 1.5px solid #C8D400;
         padding: 26px;
         border-radius: 8px;
         text-align: center;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
     }
-    
-    .stTabs [data-baseweb="tab-list"] {
-        gap: 6px;
-    }
-    
-    .stTabs [data-baseweb="tab"] {
-        background-color: #1A1E24 !important;
-        border: 1px solid #2D333F !important;
-        border-radius: 6px 6px 0px 0px !important;
-        padding: 10px 18px !important;
-        color: #A0AAB5 !important;
-    }
-    
-    .stTabs [aria-selected="true"] {
-        background-color: #2D333F !important;
+
+    .roi-result-value {
         color: #C8D400 !important;
-        border-bottom: 3px solid #C8D400 !important;
+        font-size: 2.6rem !important;
+        font-weight: 800 !important;
+        line-height: 1.1 !important;
+        margin: 8px 0 12px 0 !important;
+        letter-spacing: -0.5px !important;
+        text-shadow: 0 0 18px rgba(200, 212, 0, 0.35);
+    }
+
+    /* Slider Styling in StraightAds Brand Lime */
+    div[data-testid="stSlider"] [data-baseweb="slider"] {
+        padding-top: 8px !important;
+        padding-bottom: 8px !important;
+    }
+
+    div[data-testid="stSlider"] [role="slider"] {
+        background-color: #C8D400 !important;
+        border: 2.5px solid #FFFFFF !important;
+        box-shadow: 0 0 12px rgba(200, 212, 0, 0.7) !important;
+        width: 18px !important;
+        height: 18px !important;
+    }
+
+    div[data-testid="stSlider"] [data-testid="stThumbValue"] {
+        color: #C8D400 !important;
         font-weight: 700 !important;
+        font-family: monospace !important;
+    }
+
+    /* Number Input & Form Focus Highlights */
+    .stNumberInput input:focus, 
+    .stTextInput input:focus {
+        border-color: #C8D400 !important;
+        box-shadow: 0 0 10px rgba(200, 212, 0, 0.3) !important;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -625,31 +745,83 @@ def show_site_modal(image_bytes: bytes, domain: str, url: str):
         st.warning(f"Kein Screenshot für '{domain}' verfügbar. Bitte prüfen Sie die Erreichbarkeit der Ziel-URL.")
 
 
+def normalize_text_spacing(text: str) -> str:
+    """
+    Bereinigt fehlende Leerzeichen bei HTML-Tag-Verschachtelungen, 
+    Wortübergängen (z.B. 'GrowthMIT' -> 'Growth MIT') und Satzzeichen,
+    unter Beibehaltung von Standard-Abkürzungen wie 'GmbH'.
+    """
+    if not text:
+        return ""
+    # Schütze Abkürzungen wie 'GmbH'
+    t = re.sub(r'\bGmb\s*H\b', '___GMBH___', text, flags=re.IGNORECASE)
+    # 1. Trenne Übergänge von Kleinbuchstabe zu Großbuchstabe (z.B. GrowthMIT -> Growth MIT)
+    t = re.sub(r'([a-zäöüß])([A-ZÄÖÜ])', r'\1 \2', t)
+    # 2. Trenne Großbuchstaben vor nachfolgenden Wörtern (z.B. MITStraight -> MIT Straight)
+    t = re.sub(r'([A-ZÄÖÜ]{2,})([A-ZÄÖÜ][a-zäöüß])', r'\1 \2', t)
+    # 3. Trenne Punkte/Satzzeichen ohne folgendes Leerzeichen (z.B. 'CUSTOMERS.STRAIGHT' -> 'CUSTOMERS. STRAIGHT')
+    t = re.sub(r'([a-zA-Z0-9äöüÄÖÜß])([.!?])([A-ZÄÖÜa-zäöüß])', r'\1\2 \3', t)
+    # Abkürzungen wiederherstellen
+    t = t.replace('___GMBH___', 'GmbH')
+    t = re.sub(r'\bGmb\s+H\b', 'GmbH', t, flags=re.IGNORECASE)
+    # 4. Whitespace normalisieren
+    return " ".join(t.split()).strip()
+
+
 def fetch_fullpage_screenshot(target_url: str) -> bytes:
     """
-    Erstellt zuverlässig einen hochauflösenden Website-Screenshot.
-    Multi-Engine Kaskade: Cloud High-Speed Engine (mshots) -> ScreenshotAPI -> Lokaler Headless-Browser -> Microlink.
+    Erstellt zuverlässig einen sauberen, hochauflösenden Website-Screenshot
+    ohne störende Cookie-Banner oder Overlays.
+    Multi-Engine Kaskade: Playwright Headless (Cookie-Blocked) -> ScreenshotAPI -> mshots -> Microlink.
     """
     clean_url = target_url.strip()
     if not clean_url.startswith(('http://', 'https://')):
         clean_url = 'https://' + clean_url
 
-    # 1. Cloud High-Speed Engine (mshots, 1440px High-Res, 100% cloud-tauglich)
-    for attempt in range(2):
-        try:
-            r = requests.get(f'https://s.wordpress.com/mshots/v1/{clean_url}?w=1440', timeout=7)
-            if r.status_code == 200 and len(r.content) > 10000 and not r.content.startswith(b'GIF'):
-                return r.content
+    # 1. Playwright Headless Engine mit Cookie-Banner-Unterdrückung
+    try:
+        from playwright.sync_api import sync_playwright
+        with sync_playwright() as p:
+            browser = p.chromium.launch(channel="msedge", headless=True)
+            page = browser.new_page(viewport={"width": 1360, "height": 1900})
+            page.goto(clean_url, timeout=14000, wait_until="domcontentloaded")
             time.sleep(1.2)
-        except Exception:
-            pass
+            # Cookie Banner CSS entfernen
+            page.add_style_tag(content="""
+                #onetrust-consent-sdk, #CybotCookiebotDialog, #usercentrics-root, 
+                .cookie-banner, .cookie-modal, [id*="cookie" i], [class*="cookie" i], 
+                [id*="consent" i], [class*="consent" i], [aria-label*="cookie" i], 
+                [aria-label*="consent" i], #cmpbox, .cc-window, .borlabs-cookie-box,
+                div[class*="popup" i], div[id*="popup" i], div[class*="dialog" i] {
+                    display: none !important;
+                    visibility: hidden !important;
+                    opacity: 0 !important;
+                    pointer-events: none !important;
+                }
+            """)
+            for sel in ['button:has-text("Alle akzeptieren")', 'button:has-text("Akzeptieren")', 'button:has-text("Zustimmen")']:
+                try:
+                    btn = page.locator(sel)
+                    if btn.count() > 0 and btn.first.is_visible():
+                        btn.first.click(timeout=1000)
+                        time.sleep(0.4)
+                        break
+                except Exception:
+                    pass
+            time.sleep(0.8)
+            shot = page.screenshot(full_page=False)
+            browser.close()
+            if shot and len(shot) > 10000:
+                return shot
+    except Exception:
+        pass
 
     # 2. ScreenshotAPI.to (sofern API-Key hinterlegt)
     if SCREENSHOTAPI_KEY:
         try:
             api_url = "https://screenshotapi.to/api/v1/screenshot"
             headers = {"x-api-key": SCREENSHOTAPI_KEY}
-            css_unlock = "* { opacity: 1 !important; visibility: visible !important; transform: none !important; animation: none !important; transition: none !important; }"
+            css_unlock = "* { opacity: 1 !important; visibility: visible !important; } #onetrust-consent-sdk, [class*='cookie'], [id*='cookie'] { display: none !important; }"
             params = {
                 "url": clean_url,
                 "type": "png",
@@ -666,42 +838,13 @@ def fetch_fullpage_screenshot(target_url: str) -> bytes:
         except Exception:
             pass
 
-    # 3. Lokaler Headless-Browser (für lokale Windows-Umgebungen)
-    browser_paths = [
-        r'C:\Program Files\Google\Chrome\Application\chrome.exe',
-        r'C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe',
-        r'C:\Program Files (x86)\Google\Chrome\Application\chrome.exe',
-        r'C:\Program Files\Microsoft\Edge\Application\msedge.exe',
-        os.path.expandvars(r'%LOCALAPPDATA%\Google\Chrome\Application\chrome.exe'),
-        os.path.expandvars(r'%LOCALAPPDATA%\Microsoft\Edge\Application\msedge.exe')
-    ]
-    for bp in browser_paths:
-        if os.path.exists(bp):
-            tmp_png = os.path.join(tempfile.gettempdir(), f'straightads_full_{os.getpid()}_{int(time.time())}.png')
-            cmd = [
-                bp,
-                '--headless=new',
-                '--disable-gpu',
-                '--no-sandbox',
-                '--hide-scrollbars',
-                '--window-size=1280,2400',
-                f'--screenshot={tmp_png}',
-                clean_url
-            ]
-            try:
-                res = subprocess.run(cmd, capture_output=True, text=True, timeout=15)
-                if res.returncode == 0 and os.path.exists(tmp_png) and os.path.getsize(tmp_png) > 10000:
-                    with open(tmp_png, 'rb') as f:
-                        content = f.read()
-                    try:
-                        os.remove(tmp_png)
-                    except Exception:
-                        pass
-                    if not content.startswith(b'GIF'):
-                        return content
-            except Exception:
-                pass
-            break
+    # 3. Fallback: Cloud High-Speed Engine (mshots)
+    try:
+        r = requests.get(f'https://s.wordpress.com/mshots/v1/{clean_url}?w=1440', timeout=7)
+        if r.status_code == 200 and len(r.content) > 10000 and not r.content.startswith(b'GIF'):
+            return r.content
+    except Exception:
+        pass
 
     # 4. Fallback: Microlink API
     try:
@@ -719,7 +862,7 @@ def clean_extracted_business_name(title: str, domain: str) -> str:
     if not title or title.strip() == "":
         return domain.replace(".de", "").replace(".com", "").capitalize()
         
-    cleaned = title
+    cleaned = normalize_text_spacing(title)
     separators = [" | ", " - ", " – ", " — ", " : ", " // "]
     for sep in separators:
         if sep in cleaned:
@@ -730,7 +873,7 @@ def clean_extracted_business_name(title: str, domain: str) -> str:
                     cleaned = p_trim
                     break
     cleaned = re.sub(r'\s*(?:in|für|fuer|region)\s+[A-Za-zäöüÄÖÜß\s]+$', '', cleaned, flags=re.IGNORECASE).strip()
-    return cleaned if len(cleaned) > 2 else domain.capitalize()
+    return normalize_text_spacing(cleaned) if len(cleaned) > 2 else domain.capitalize()
 
 
 def query_serper_ranking(clean_domain: str, page_title: str, h1_text: str, business_name: str) -> dict:
@@ -1067,27 +1210,57 @@ def detect_dsgvo_consent(html_content: str) -> dict:
     return {"tool": "Standard / Basis-Banner", "status": "Prüfung empfohlen", "badge": "badge-warn"}
 
 
+def format_eur_de(amount: float) -> str:
+    """Formatiert Beträge konsistent im deutschen Währungsformat mit Tausenderpunkt und Komma (z.B. 18.000,00 EUR)"""
+    formatted = f"{amount:,.2f}"
+    return formatted.replace(",", "X").replace(".", ",").replace("X", ".") + " EUR"
+
+
+def format_number_de(amount: int) -> str:
+    """Formatiert Ganzzahlen mit Tausenderpunkt (z.B. 6.000)"""
+    return f"{amount:,}".replace(",", ".")
+
+
 def render_radial_health_score(score: int, grade: str, grade_desc: str):
-    color = "#C8D400" if score >= 75 else ("#FFA500" if score >= 50 else "#FF4B4B")
-    circumference = 2 * 3.14159 * 42
+    # Dynamische Ampelfarben & Badges nach 100-Punkte Matrix
+    if score >= 75:
+        color = "#C8D400"
+        badge_text = "Exzellente Basis"
+        badge_bg = "rgba(200, 212, 0, 0.12)"
+        border_col = "rgba(200, 212, 0, 0.35)"
+    elif score >= 50:
+        color = "#FFA500"
+        badge_text = "Optimierungsbedarf"
+        badge_bg = "rgba(255, 165, 0, 0.12)"
+        border_col = "rgba(255, 165, 0, 0.35)"
+    else:
+        color = "#FF4B4B"
+        badge_text = "Kritische Reibung"
+        badge_bg = "rgba(255, 75, 75, 0.12)"
+        border_col = "rgba(255, 75, 75, 0.35)"
+        
+    circumference = 2 * 3.14159 * 42  # ~263.89
     stroke_dashoffset = circumference - (score / 100) * circumference
     
     return (
-        f'<div style="background-color: #14181F; border: 1px solid #2D333F; border-radius: 8px; padding: 20px; display: flex; align-items: center; justify-content: space-around;">'
-        f'<div style="position: relative; width: 110px; height: 110px;">'
+        f'<div style="background-color: #14181F; border: 1.5px solid #2D333F; border-radius: 8px; padding: 22px; display: flex; align-items: center; justify-content: space-around; width: 100%; box-shadow: 0 4px 18px rgba(0,0,0,0.35);">'
+        f'<div style="position: relative; width: 118px; height: 118px; display: flex; align-items: center; justify-content: center;">'
         f'<svg viewBox="0 0 100 100" style="width: 100%; height: 100%; transform: rotate(-90deg);">'
-        f'<circle cx="50" cy="50" r="42" stroke="#252B37" stroke-width="9" fill="transparent"/>'
-        f'<circle cx="50" cy="50" r="42" stroke="{color}" stroke-width="9" fill="transparent" stroke-dasharray="{circumference}" stroke-dashoffset="{stroke_dashoffset}" stroke-linecap="round"/>'
+        f'<circle cx="50" cy="50" r="42" stroke="#222834" stroke-width="9" fill="transparent"/>'
+        f'<circle cx="50" cy="50" r="42" stroke="{color}" stroke-width="9" fill="transparent" stroke-dasharray="{circumference:.2f}" stroke-dashoffset="{stroke_dashoffset:.2f}" stroke-linecap="round" style="transition: stroke-dashoffset 1.2s cubic-bezier(0.4, 0, 0.2, 1);"/>'
         f'</svg>'
-        f'<div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center;">'
-        f'<span style="font-size: 1.4rem; font-weight: 800; color: #FFFFFF;">{score}</span>'
-        f'<span style="font-size: 0.65rem; color: #A0AAB5; text-transform: uppercase;">von 100</span>'
+        f'<div style="position: absolute; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;">'
+        f'<span style="font-size: 1.6rem; font-weight: 800; color: #FFFFFF; line-height: 1;">{score}</span>'
+        f'<span style="font-size: 0.65rem; color: #A0AAB5; text-transform: uppercase; font-weight: 700; margin-top: 3px;">von 100</span>'
         f'</div>'
         f'</div>'
-        f'<div style="margin-left: 15px;">'
-        f'<div style="font-size: 0.8rem; text-transform: uppercase; color: #A0AAB5; letter-spacing: 0.8px;">Conversion Health Score</div>'
-        f'<div style="font-size: 2.0rem; font-weight: 800; color: {color}; line-height: 1.1;">Grade {grade}</div>'
-        f'<div style="font-size: 0.88rem; color: #E2E8F0; margin-top: 4px;">{grade_desc}</div>'
+        f'<div style="margin-left: 20px; flex: 1;">'
+        f'<div style="font-size: 0.76rem; text-transform: uppercase; color: #A0AAB5; letter-spacing: 0.8px; font-weight: 700;">Conversion Health Score</div>'
+        f'<div style="display: flex; align-items: center; gap: 10px; margin-top: 2px;">'
+        f'<span style="font-size: 2.1rem; font-weight: 800; color: {color}; line-height: 1;">Grade {grade}</span>'
+        f'<span style="background: {badge_bg}; color: {color}; border: 1px solid {border_col}; padding: 3px 9px; border-radius: 12px; font-size: 0.72rem; font-weight: bold; text-transform: uppercase;">{badge_text}</span>'
+        f'</div>'
+        f'<div style="font-size: 0.88rem; color: #E2E8F0; margin-top: 6px; line-height: 1.4;">{grade_desc}</div>'
         f'</div>'
         f'</div>'
     )
@@ -1100,8 +1273,8 @@ def build_smart_fallback_psychology(clean_domain: str, page_title: str, h1_tags:
     GARANTIERT OHNE starre if/else-Branchenschubladen.
     """
     # 1. Echten Kern-Fokus & Hauptleistung dynamisch aus H1, Title & Keywords ermitteln
-    clean_h1 = h1_tags[0].strip() if h1_tags and len(h1_tags[0].strip()) > 3 else ""
-    clean_title = re.sub(r'\s*[-|–•].*$', '', page_title).strip()
+    clean_h1 = normalize_text_spacing(h1_tags[0].strip()) if h1_tags and len(h1_tags[0].strip()) > 3 else ""
+    clean_title = normalize_text_spacing(re.sub(r'\s*[-|–•].*$', '', page_title).strip())
     
     if clean_h1:
         offer_focus = clean_h1
@@ -1113,7 +1286,8 @@ def build_smart_fallback_psychology(clean_domain: str, page_title: str, h1_tags:
     else:
         offer_focus = f"Qualitätsangebote & Dienstleistungen von {clean_biz_name}"
         
-    business_model = f"{clean_biz_name} ({offer_focus[:55]})"
+    offer_focus = normalize_text_spacing(offer_focus)
+    business_model = normalize_text_spacing(f"{clean_biz_name} ({offer_focus[:55]})")
     
     # 2. Primäre CTAs & Top-Keywords für maximale Relevanz isolieren
     ctas = dom_data.get("distinct_ctas", [])
@@ -1310,7 +1484,7 @@ st.markdown(f"""
     </div>
     <div style="display:flex; align-items:center; gap:16px;">
         <div style="background:rgba(200,212,0,0.1); border:1px solid #C8D400; padding:6px 12px; border-radius:16px; font-size:0.75rem; font-weight:700; color:#C8D400; display:flex; align-items:center; gap:6px;">
-            <span>🧠 MARKETING BRAIN:</span>
+            <span>MARKETING BRAIN:</span>
             <span style="color:#FFFFFF;">{marketing_brain.total_modules} MODULE AKTIV</span>
         </div>
         <div style="text-align: right;">
@@ -1387,13 +1561,13 @@ if start_scan_btn:
                 
             # 2. Metadata & DOM
             st.write("2/6: Analysiere Headings, Formulare, CTAs und Trust-Signale...")
-            page_title = soup.title.string.strip() if soup.title and soup.title.string else clean_domain.capitalize()
+            page_title = normalize_text_spacing(soup.title.string.strip() if soup.title and soup.title.string else clean_domain.capitalize())
             desc_tag = soup.find('meta', attrs={'name': lambda x: x and x.lower() == 'description'}) or \
                        soup.find('meta', attrs={'property': lambda x: x and x.lower() == 'og:description'})
-            meta_desc = desc_tag.get('content', '').strip() if desc_tag and desc_tag.get('content') else "Keine Meta-Description im Quellcode hinterlegt."
+            meta_desc = normalize_text_spacing(desc_tag.get('content', '').strip()) if desc_tag and desc_tag.get('content') else "Keine Meta-Description im Quellcode hinterlegt."
             
-            h1_tags = [h.get_text().strip() for h in soup.find_all('h1') if h.get_text().strip()]
-            h2_tags = [h.get_text().strip() for h in soup.find_all('h2') if h.get_text().strip()]
+            h1_tags = [normalize_text_spacing(h.get_text(separator=' ')) for h in soup.find_all('h1') if h.get_text().strip()]
+            h2_tags = [normalize_text_spacing(h.get_text(separator=' ')) for h in soup.find_all('h2') if h.get_text().strip()]
             clean_biz_name = clean_extracted_business_name(page_title, clean_domain)
             
             imgs = soup.find_all('img')
@@ -1508,19 +1682,18 @@ else:
     data = st.session_state["scan_data"]
     fogg = data["psychology_res"]
     
-    col_t_title, col_t_btn, col_t_biz = st.columns([2.0, 1.2, 1.0])
+    col_t_title, col_t_btn = st.columns([3.2, 1.0])
     with col_t_title:
-        st.markdown(f"### AUDIT FÜR: `<span style='color:#C8D400;'>{data['domain']}</span>`", unsafe_allow_html=True)
-    with col_t_btn:
-        st.markdown("<div style='margin-top: 4px;'></div>", unsafe_allow_html=True)
-        if st.button("🔍 View Site / Live-Vorschau", key="view_site_global_btn", help="Öffnet den vollständigen Live-Screenshot der Website als scrollbares Overlay", use_container_width=True):
-            show_site_modal(data["screenshot_bytes"], data["domain"], data["url"])
-    with col_t_biz:
         st.markdown(f"""
-        <div style="text-align: right; margin-top: 10px;">
-            <span class="badge-status badge-ok">{fogg.get('business_model', 'Erkannt')}</span>
+        <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap; margin-bottom:8px;">
+            <span style="font-size:1.15rem; font-weight:700; color:#FFFFFF; text-transform:uppercase; letter-spacing:0.5px;">Audit für:</span>
+            <span style="font-size:1.25rem; font-weight:700; color:#C8D400;">{data['domain']}</span>
+            <span class="badge-status badge-ok" style="font-size:0.75rem;">{fogg.get('business_model', 'Erkannt')}</span>
         </div>
         """, unsafe_allow_html=True)
+    with col_t_btn:
+        if st.button("↗ Zur Webseite", key="view_site_global_btn", help="Öffnet den vollständigen Live-Screenshot der Website als scrollbares Overlay", use_container_width=True):
+            show_site_modal(data["screenshot_bytes"], data["domain"], data["url"])
     
     tab1, tab2, tab3, tab4, tab5, tab6, tab7 = st.tabs([
         "SEO- & DOM-Strukturanalyse",
@@ -1534,130 +1707,120 @@ else:
     
     # ---------------- TAB 1: SEO & DOM ----------------
     with tab1:
-        # ZONE 1: HERO / HIGH-LEVEL ÜBERBLICK (First Fold)
+        # 1. Kompakte Status-Boxen in einer Zeile
         t_ok = 10 < data["title_len"] <= 60
         d_ok = 20 < data["meta_desc_len"] <= 160
         h1_cnt = len(data["h1_tags"])
         h1_ok = (h1_cnt == 1)
         form_ok = (data['dom_data']['form_field_count'] <= 4)
 
-        st.markdown("""
+        st.markdown(f"""
+        <div class="stat-pills-row">
+            <div class="stat-pill-box">
+                <span style="font-size:0.85rem; color:#FFFFFF; font-weight:600;">Meta-Tags:</span>
+                <span class="badge-status {'badge-ok' if t_ok and d_ok else 'badge-warn'}">{'Optimal' if t_ok and d_ok else 'Prüfung empfohlen'}</span>
+            </div>
+            <div class="stat-pill-box">
+                <span style="font-size:0.85rem; color:#FFFFFF; font-weight:600;">H1-Hierarchie:</span>
+                <span class="badge-status {'badge-ok' if h1_ok else 'badge-warn'}">{f'{h1_cnt} H1 vorhanden' if h1_cnt > 0 else 'Keine H1'}</span>
+            </div>
+            <div class="stat-pill-box">
+                <span style="font-size:0.85rem; color:#FFFFFF; font-weight:600;">Einstiegs-Hürde:</span>
+                <span class="badge-status {'badge-ok' if form_ok else 'badge-warn'}">{f"{data['dom_data']['form_field_count']} Formularfelder" if form_ok else 'Hohe Hürde'}</span>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
+        # 2. Google SERP Simulator
+        st.markdown(f"""
         <div class="section-card">
             <div class="section-card-header">
-                <div class="section-card-title">🔍 GOOGLE SERP & ON-PAGE STATUS (FIRST FOLD)</div>
-                <div class="section-card-badge">Live-Index Status</div>
+                <div class="section-card-title">GOOGLE SERP SIMULATOR (DESKTOP & MOBILE)</div>
+                <div class="section-card-badge">Suchergebnis-Vorschau</div>
             </div>
-        """, unsafe_allow_html=True)
-        col_t1_1, col_t1_2 = st.columns([1, 1.35])
-        with col_t1_1:
-            st.markdown(f"""
-            <div style="background:#14181F; border:1px solid #2D333F; border-radius:8px; padding:18px; display:flex; flex-direction:column; justify-content:space-between; height:100%;">
-                <div>
-                    <div style="font-size:0.78rem; text-transform:uppercase; color:#A0AAB5; letter-spacing:0.8px; font-weight:700; margin-bottom:12px;">3 Kern-Signale der Domain</div>
-                    <div style="margin-bottom:10px; display:flex; align-items:center; justify-content:space-between;">
-                        <span style="font-size:0.85rem; color:#FFFFFF; font-weight:600;">Meta-Tags:</span>
-                        <span class="badge-status {'badge-ok' if t_ok and d_ok else 'badge-warn'}">{'Optimal' if t_ok and d_ok else 'Prüfung empfohlen'}</span>
-                    </div>
-                    <div style="margin-bottom:10px; display:flex; align-items:center; justify-content:space-between;">
-                        <span style="font-size:0.85rem; color:#FFFFFF; font-weight:600;">H1-Hierarchie:</span>
-                        <span class="badge-status {'badge-ok' if h1_ok else 'badge-warn'}">{f'{h1_cnt} H1 vorhanden' if h1_cnt > 0 else 'Keine H1'}</span>
-                    </div>
-                    <div style="display:flex; align-items:center; justify-content:space-between;">
-                        <span style="font-size:0.85rem; color:#FFFFFF; font-weight:600;">Einstiegs-Hürde:</span>
-                        <span class="badge-status {'badge-ok' if form_ok else 'badge-warn'}">{f"{data['dom_data']['form_field_count']} Formularfelder" if form_ok else 'Hohe Hürde'}</span>
-                    </div>
-                </div>
-                <div style="font-size:0.80rem; color:#A0AAB5; margin-top:14px; border-top:1px solid #252B37; padding-top:10px;">
-                    ⮞ <strong style="color:#C8D400;">Technisches Fazit:</strong> Saubere semantische Basis für Crawler & Mobilgeräte.
-                </div>
-            </div>
-            """, unsafe_allow_html=True)
-        with col_t1_2:
-            st.markdown(f"""
-            <div class="serp-preview-card" style="margin-bottom:0; display:flex; flex-direction:column; justify-content:center; height:100%;">
-                <div style="font-size:0.75rem; text-transform:uppercase; color:#A0AAB5; letter-spacing:0.8px; font-weight:700; margin-bottom:6px;">Google SERP Simulator (Desktop & Mobile)</div>
+            <div class="serp-preview-card" style="margin-bottom:0;">
                 <div class="serp-url">https://{data['domain']}</div>
                 <div class="serp-title">{data['title']}</div>
                 <div class="serp-desc">{data['meta_desc']}</div>
             </div>
-            """, unsafe_allow_html=True)
-        st.markdown("</div>", unsafe_allow_html=True)
+        </div>
+        """, unsafe_allow_html=True)
 
-        # ZONE 2: STRUKTURIERTE DETAIL-EBENE (2 Spalten)
-        col_d1, col_d2 = st.columns(2)
-        with col_d1:
-            st.markdown(f"""
-            <div class="section-card" style="height:100%;">
-                <div class="section-card-header">
-                    <div class="section-card-title">[ 01 ] META-TAGS & ON-PAGE SIGNALE</div>
-                    <div class="section-card-badge">HTML Quelltext</div>
+        # 3. [ 01 ] Meta-Tags & On-Page Signale
+        st.markdown(f"""
+        <div class="section-card">
+            <div class="section-card-header">
+                <div class="section-card-title">[ 01 ] META-TAGS & ON-PAGE SIGNALE</div>
+                <div class="section-card-badge">HTML Quelltext</div>
+            </div>
+            <div style="background:#14181F; border:1px solid #2D333F; border-radius:6px; padding:12px 14px; margin-bottom:12px;">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+                    <span style="font-size:0.78rem; text-transform:uppercase; color:#A0AAB5; font-weight:700;">Meta Title (Seitentitel)</span>
+                    <span style="font-size:0.75rem; color:{'#C8D400' if t_ok else '#FFA500'}; font-family:monospace; font-weight:bold;">{data['title_len']} / 60 Zeichen</span>
                 </div>
-                <div style="background:#14181F; border:1px solid #2D333F; border-radius:6px; padding:12px 14px; margin-bottom:12px;">
-                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
-                        <span style="font-size:0.78rem; text-transform:uppercase; color:#A0AAB5; font-weight:700;">Meta Title (Seitentitel)</span>
-                        <span style="font-size:0.75rem; color:{'#C8D400' if t_ok else '#FFA500'}; font-family:monospace; font-weight:bold;">{data['title_len']} / 60 Zeichen</span>
-                    </div>
-                    <div style="font-size:0.92rem; color:#FFFFFF; font-weight:600; line-height:1.4;">{data['title']}</div>
+                <div style="font-size:0.92rem; color:#FFFFFF; font-weight:600; line-height:1.4;">{data['title']}</div>
+            </div>
+            <div style="background:#14181F; border:1px solid #2D333F; border-radius:6px; padding:12px 14px; margin-bottom:12px;">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+                    <span style="font-size:0.78rem; text-transform:uppercase; color:#A0AAB5; font-weight:700;">Meta Description (Beschreibung)</span>
+                    <span style="font-size:0.75rem; color:{'#C8D400' if d_ok else '#FFA500'}; font-family:monospace; font-weight:bold;">{data['meta_desc_len']} / 160 Zeichen</span>
                 </div>
-                <div style="background:#14181F; border:1px solid #2D333F; border-radius:6px; padding:12px 14px; margin-bottom:12px;">
-                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
-                        <span style="font-size:0.78rem; text-transform:uppercase; color:#A0AAB5; font-weight:700;">Meta Description (Beschreibung)</span>
-                        <span style="font-size:0.75rem; color:{'#C8D400' if d_ok else '#FFA500'}; font-family:monospace; font-weight:bold;">{data['meta_desc_len']} / 160 Zeichen</span>
-                    </div>
-                    <div style="font-size:0.85rem; color:#E2E8F0; line-height:1.4;">{data['meta_desc']}</div>
+                <div style="font-size:0.85rem; color:#E2E8F0; line-height:1.4;">{data['meta_desc']}</div>
+            </div>
+            <div style="background:#14181F; border:1px solid #2D333F; border-radius:6px; padding:12px 14px; margin-bottom:14px;">
+                <div style="font-size:0.78rem; text-transform:uppercase; color:#A0AAB5; font-weight:700; margin-bottom:4px;">Hauptüberschrift (H1)</div>
+                <div style="font-size:0.92rem; color:#C8D400; font-weight:600;">{data['h1_tags'][0] if data['h1_tags'] else 'Keine H1 vorhanden'}</div>
+            </div>
+            <div style="font-size:0.85rem; color:#E2E8F0; line-height:1.6;">
+                <div>— <strong style="color:#C8D400;">Längen-Check:</strong> Snippet-Längen passen optimal in die Google-Suchraster.</div>
+                <div>— <strong style="color:#C8D400;">Semantische Führung:</strong> H1 formuliert den zentralen Nutzen für Crawler & Besucher.</div>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
+        # 4. [ 02 ] DOM & Conversion-Hürde
+        st.markdown(f"""
+        <div class="section-card">
+            <div class="section-card-header">
+                <div class="section-card-title">[ 02 ] DOM & CONVERSION-HÜRDE</div>
+                <div class="section-card-badge">First-Fold Interaktion</div>
+            </div>
+            <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:12px; margin-bottom:16px;">
+                <div class="metric-card" style="padding:12px 8px;">
+                    <div class="metric-label" style="font-size:0.72rem;">CTAs Isoliert</div>
+                    <div class="metric-value-accent" style="font-size:1.6rem;">{data['dom_data']['total_cta_count']}</div>
                 </div>
-                <div style="background:#14181F; border:1px solid #2D333F; border-radius:6px; padding:12px 14px; margin-bottom:14px;">
-                    <div style="font-size:0.78rem; text-transform:uppercase; color:#A0AAB5; font-weight:700; margin-bottom:4px;">Hauptüberschrift (H1)</div>
-                    <div style="font-size:0.92rem; color:#C8D400; font-weight:600;">{data['h1_tags'][0] if data['h1_tags'] else 'Keine H1 vorhanden'}</div>
+                <div class="metric-card" style="padding:12px 8px;">
+                    <div class="metric-label" style="font-size:0.72rem;">Formularfelder</div>
+                    <div class="metric-value-accent" style="font-size:1.6rem;">{data['dom_data']['form_field_count']}</div>
                 </div>
-                <div style="font-size:0.85rem; color:#E2E8F0; line-height:1.6;">
-                    <div>⮞ <strong style="color:#C8D400;">Längen-Check:</strong> Snippet-Längen passen optimal in die Google-Suchraster.</div>
-                    <div>⮞ <strong style="color:#C8D400;">Semantische Führung:</strong> H1 formuliert den zentralen Nutzen für Crawler & Besucher.</div>
+                <div class="metric-card" style="padding:12px 8px;">
+                    <div class="metric-label" style="font-size:0.72rem;">Trust-Signale</div>
+                    <div class="metric-value-accent" style="font-size:1.6rem;">{len(data['dom_data']['trust_signals'])}</div>
                 </div>
             </div>
-            """, unsafe_allow_html=True)
+            <div style="font-size:0.85rem; color:#E2E8F0; line-height:1.6;">
+                <div>— <strong style="color:#C8D400;">First-Fold Dominanz:</strong> Haupt-Button '{data['dom_data']['distinct_ctas'][0] if data['dom_data']['distinct_ctas'] else 'Kontakt'}' als primärer Trigger aktiv.</div>
+                <div>— <strong style="color:#C8D400;">Niedrige Barriere:</strong> {data['dom_data']['form_field_count']} Felder im Kontaktformular ermöglichen schnellen Abschluss.</div>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
 
-        with col_d2:
-            st.markdown(f"""
-            <div class="section-card" style="height:100%;">
-                <div class="section-card-header">
-                    <div class="section-card-title">[ 02 ] DOM & CONVERSION-HÜRDE</div>
-                    <div class="section-card-badge">First-Fold Interaktion</div>
-                </div>
-                <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; margin-bottom:16px;">
-                    <div class="metric-card" style="padding:12px 8px;">
-                        <div class="metric-label" style="font-size:0.72rem;">CTAs Isoliert</div>
-                        <div class="metric-value-accent" style="font-size:1.6rem;">{data['dom_data']['total_cta_count']}</div>
-                    </div>
-                    <div class="metric-card" style="padding:12px 8px;">
-                        <div class="metric-label" style="font-size:0.72rem;">Formularfelder</div>
-                        <div class="metric-value-accent" style="font-size:1.6rem;">{data['dom_data']['form_field_count']}</div>
-                    </div>
-                    <div class="metric-card" style="padding:12px 8px;">
-                        <div class="metric-label" style="font-size:0.72rem;">Trust-Signale</div>
-                        <div class="metric-value-accent" style="font-size:1.6rem;">{len(data['dom_data']['trust_signals'])}</div>
-                    </div>
-                </div>
-                <div style="font-size:0.85rem; color:#E2E8F0; line-height:1.6; margin-bottom:14px;">
-                    <div>⮞ <strong style="color:#C8D400;">First-Fold Dominanz:</strong> Haupt-Button '{data['dom_data']['distinct_ctas'][0] if data['dom_data']['distinct_ctas'] else 'Kontakt'}' als primärer Trigger aktiv.</div>
-                    <div>⮞ <strong style="color:#C8D400;">Niedrige Barriere:</strong> {data['dom_data']['form_field_count']} Felder im Kontaktformular ermöglichen schnellen Abschluss.</div>
-                </div>
-            """, unsafe_allow_html=True)
-            with st.expander(f"▼ [ Detail-Quelltext aller {data['dom_data']['total_cta_count']} erkannten Buttons & Links ansehen ]", expanded=False):
-                if data["dom_data"]["unique_ctas"]:
-                    rows_html = "".join([
-                        f'<tr style="border-bottom:1px solid #252B37;"><td style="padding:8px 12px; text-align:left; font-weight:600; color:#FFFFFF;">{item["text"]}</td><td style="padding:8px 12px; text-align:left;"><span style="background:rgba(200,212,0,0.12); color:#C8D400; border:1px solid rgba(200,212,0,0.3); padding:2px 8px; border-radius:12px; font-size:0.72rem; font-weight:bold;">{item["type"]}</span></td><td style="padding:8px 12px; text-align:left; color:#A0AAB5; font-family:monospace; font-size:0.78rem;">&lt;{item["tag"]}&gt;</td></tr>'
-                        for item in data["dom_data"]["unique_ctas"]
-                    ])
-                    cta_table_html = '<div style="background:#0E1116; border:1px solid #252B37; border-radius:6px; overflow:hidden;"><table style="width:100%; border-collapse:collapse; text-align:left; font-size:0.84rem;"><thead><tr style="background:#1F242D; color:#C8D400; border-bottom:1px solid #2D333F;"><th style="padding:8px 12px; text-align:left;">Button-Text</th><th style="padding:8px 12px; text-align:left;">Typ</th><th style="padding:8px 12px; text-align:left;">Tag</th></tr></thead><tbody>' + rows_html + '</tbody></table></div>'
-                    st.markdown(cta_table_html, unsafe_allow_html=True)
-                else:
-                    st.info("Keine separaten Button-Elemente isoliert.")
-            st.markdown("</div>", unsafe_allow_html=True)
+        # 5. Sauber getrennter Expander mit Pfeil und 16px Abstand
+        with st.expander(f"[ Detail-Quelltext aller {data['dom_data']['total_cta_count']} erkannten Buttons & Links ansehen ]", expanded=False):
+            if data["dom_data"]["unique_ctas"]:
+                rows_html = "".join([
+                    f'<tr style="border-bottom:1px solid #252B37;"><td style="padding:8px 12px; text-align:left; font-weight:600; color:#FFFFFF;">{item["text"]}</td><td style="padding:8px 12px; text-align:left;"><span style="background:rgba(200,212,0,0.12); color:#C8D400; border:1px solid rgba(200,212,0,0.3); padding:2px 8px; border-radius:12px; font-size:0.72rem; font-weight:bold;">{item["type"]}</span></td><td style="padding:8px 12px; text-align:left; color:#A0AAB5; font-family:monospace; font-size:0.78rem;">&lt;{item["tag"]}&gt;</td></tr>'
+                    for item in data["dom_data"]["unique_ctas"]
+                ])
+                cta_table_html = f'<div style="background:#0E1116; border:1px solid #252B37; border-radius:6px; overflow:hidden;"><table style="width:100%; border-collapse:collapse; text-align:left; font-size:0.84rem;"><thead><tr style="background:#1F242D; color:#C8D400; border-bottom:1px solid #2D333F;"><th style="padding:8px 12px; text-align:left;">Button-Text</th><th style="padding:8px 12px; text-align:left;">Typ</th><th style="padding:8px 12px; text-align:left;">Tag</th></tr></thead><tbody>{rows_html}</tbody></table></div>'
+                st.markdown(cta_table_html, unsafe_allow_html=True)
+            else:
+                st.info("Keine separaten Button-Elemente isoliert.")
 
-        # ZONE 3: ABSCHLUSS (StraightAds Blueprint)
+        # 6. Experten-Empfehlung strikt am Ende
         st.markdown(f"""
-        <div class="blueprint-container">
+        <div class="blueprint-container" style="margin-top:20px;">
             <div class="blueprint-title">STRAIGHTADS EXPERTEN-EMPFEHLUNG: STRUKTUR & TECHNIK</div>
             <p style="margin:0; color:#E2E8F0; font-size:0.92rem; line-height:1.5;">{fogg.get('seo_empfehlung', '')}</p>
         </div>
@@ -1666,17 +1829,17 @@ else:
     # ---------------- TAB 2: KEYWORDS & RANKING ----------------
     with tab2:
         s_rank = data["serper_ranking"]
-        # ZONE 1: HERO / GOOGLE LIVE-RANKING POWER-CARD (First Fold)
+        # 1. Google Live-Ranking Power-Card
         st.markdown(f"""
         <div class="section-card">
             <div class="section-card-header">
-                <div class="section-card-title">🎯 GOOGLE LIVE-RANKING POWER-CARD (ECHTZEIT-ABFRAGE)</div>
+                <div class="section-card-title">GOOGLE LIVE-RANKING POWER-CARD (ECHTZEIT-ABFRAGE)</div>
                 <div class="section-card-badge">Serper.dev Live Search</div>
             </div>
             <div class="rank-hero-card" style="margin-bottom:0;">
                 <div>
                     <div style="font-size:0.78rem; color:#A0AAB5; text-transform:uppercase; font-weight:700; letter-spacing:0.8px;">Geprüfte Suchanfrage bei Google</div>
-                    <div style="font-size:1.4rem; font-weight:bold; color:#FFFFFF; margin-top:2px;">'{s_rank['query']}'</div>
+                    <div style="font-size:1.35rem; font-weight:bold; color:#FFFFFF; margin-top:2px;">'{s_rank['query']}'</div>
                     <div style="font-size:0.85rem; color:#A0AAB5; margin-top:6px;">{s_rank['status_text']} &bull; <span style="color:#C8D400;">75 % aller Klicks entfallen auf die Top-3 Suchergebnisse.</span></div>
                 </div>
                 <div style="text-align:right;">
@@ -1689,60 +1852,58 @@ else:
         </div>
         """, unsafe_allow_html=True)
 
-        # ZONE 2: STRUKTURIERTE DETAIL-EBENE (2 Spalten)
-        col_k1, col_k2 = st.columns(2)
-        with col_k1:
-            top5_keywords = data["keywords_table"][:5] if data["keywords_table"] else []
-            kw_rows = "".join([
-                f'<tr style="border-bottom:1px solid #252B37; color:#E2E8F0;"><td style="padding:9px 14px; text-align:left; font-weight:600; color:#FFFFFF;">{row["Suchbegriff / Keyword"]}</td><td style="padding:9px 14px; text-align:left; color:#C8D400; font-family:monospace; font-weight:bold;">{row["Häufigkeit"]}x</td><td style="padding:9px 14px; text-align:left; color:#A0AAB5; font-family:monospace;">{row["Dichte"]}</td></tr>'
-                for row in top5_keywords
-            ])
-            st.markdown(f"""
-            <div class="section-card" style="height:100%;">
-                <div class="section-card-header">
-                    <div class="section-card-title">[ 01 ] TOP 5 ON-PAGE THEMEN & RELEVANZ</div>
-                    <div class="section-card-badge">Content-Fokus</div>
-                </div>
-                <div style="background:#14181F; border:1px solid #2D333F; border-radius:8px; overflow:hidden; margin-bottom:14px;">
-                    <table style="width:100%; border-collapse:collapse; text-align:left; font-size:0.88rem;">
-                        <thead>
-                            <tr style="background:#1F242D; color:#C8D400; border-bottom:1px solid #2D333F;">
-                                <th style="padding:10px 14px; text-align:left;">Suchbegriff</th>
-                                <th style="padding:10px 14px; text-align:left;">Häufigkeit</th>
-                                <th style="padding:10px 14px; text-align:left;">Dichte</th>
-                            </tr>
-                        </thead>
-                        <tbody>{kw_rows}</tbody>
-                    </table>
-                </div>
-                <div style="font-size:0.85rem; color:#E2E8F0; line-height:1.6;">
-                    <div>⮞ <strong style="color:#C8D400;">Thematische Klarheit:</strong> Google ordnet die Seite klar dem Schwerpunkt <em>{fogg.get('business_model', 'Dienstleistungen')}</em> zu.</div>
-                    <div>⮞ <strong style="color:#C8D400;">Natürlicher Textfluss:</strong> Alle Dichtewerte liegen im gesunden Bereich (&lt; 3.0 %).</div>
-                </div>
+        # 2. [ 01 ] Top 5 On-Page Themen
+        top5_keywords = data["keywords_table"][:5] if data["keywords_table"] else []
+        kw_rows = "".join([
+            f'<tr style="border-bottom:1px solid #252B37; color:#E2E8F0;"><td style="padding:9px 14px; text-align:left; font-weight:600; color:#FFFFFF;">{row["Suchbegriff / Keyword"]}</td><td style="padding:9px 14px; text-align:left; color:#C8D400; font-family:monospace; font-weight:bold;">{row["Häufigkeit"]}x</td><td style="padding:9px 14px; text-align:left; color:#A0AAB5; font-family:monospace;">{row["Dichte"]}</td></tr>'
+            for row in top5_keywords
+        ])
+        st.markdown(f"""
+        <div class="section-card">
+            <div class="section-card-header">
+                <div class="section-card-title">[ 01 ] TOP 5 ON-PAGE THEMEN & RELEVANZ</div>
+                <div class="section-card-badge">Content-Fokus</div>
             </div>
-            """, unsafe_allow_html=True)
-
-        with col_k2:
-            st.markdown(f"""
-            <div class="section-card" style="height:100%;">
-                <div class="section-card-header">
-                    <div class="section-card-title">[ 02 ] PULL-MARKETING & GOOGLE ADS HEBEL</div>
-                    <div class="section-card-badge">Sofort-Reichweite</div>
-                </div>
-                <div style="background:#14181F; border:1px solid #2D333F; border-radius:8px; padding:16px; margin-bottom:14px;">
-                    <div style="font-size:0.82rem; color:#FFA500; font-weight:700; text-transform:uppercase; margin-bottom:6px;">Organisch vs. Google Ads Hebel</div>
-                    <p style="font-size:0.88rem; color:#E2E8F0; margin:0; line-height:1.4;">
-                        Organische Spitzenpositionen benötigen Monate. Mit <strong>Google Search Ads</strong> sichert sich {data['clean_biz_name']} ab Tag 1 die Spitzenplätze bei kaufbereiten Entscheidern.
-                    </p>
-                </div>
-                <div style="font-size:0.85rem; color:#E2E8F0; line-height:1.6;">
-                    <div>⮞ <strong style="color:#C8D400;">Kaufabsicht sichern:</strong> Relevante Suchbegriffe direkt auf 14-Tage Conversion-Landingpages leiten.</div>
-                    <div>⮞ <strong style="color:#C8D400;">Speed-to-Market:</strong> Google Ads als sofortiger Umsatzhebel, während die organische Autorität wächst.</div>
-                </div>
+            <div style="background:#14181F; border:1px solid #2D333F; border-radius:8px; overflow:hidden; margin-bottom:14px;">
+                <table style="width:100%; border-collapse:collapse; text-align:left; font-size:0.88rem;">
+                    <thead>
+                        <tr style="background:#1F242D; color:#C8D400; border-bottom:1px solid #2D333F;">
+                            <th style="padding:10px 14px; text-align:left;">Suchbegriff</th>
+                            <th style="padding:10px 14px; text-align:left;">Häufigkeit</th>
+                            <th style="padding:10px 14px; text-align:left;">Dichte</th>
+                        </tr>
+                    </thead>
+                    <tbody>{kw_rows}</tbody>
+                </table>
             </div>
-            """, unsafe_allow_html=True)
+            <div style="font-size:0.85rem; color:#E2E8F0; line-height:1.6;">
+                <div>— <strong style="color:#C8D400;">Thematische Klarheit:</strong> Google ordnet die Seite klar dem Schwerpunkt <em>{fogg.get('business_model', 'Dienstleistungen')}</em> zu.</div>
+                <div>— <strong style="color:#C8D400;">Natürlicher Textfluss:</strong> Alle Dichtewerte liegen im gesunden Bereich (&lt; 3.0 %).</div>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
 
-        # ZONE 3: ABSCHLUSS (StraightAds Blueprint)
+        # 3. [ 02 ] Pull-Marketing & Google Ads Hebel
+        st.markdown(f"""
+        <div class="section-card">
+            <div class="section-card-header">
+                <div class="section-card-title">[ 02 ] PULL-MARKETING & GOOGLE ADS HEBEL</div>
+                <div class="section-card-badge">Sofort-Reichweite</div>
+            </div>
+            <div style="background:#14181F; border:1px solid #2D333F; border-radius:8px; padding:16px; margin-bottom:14px;">
+                <div style="font-size:0.82rem; color:#FFA500; font-weight:700; text-transform:uppercase; margin-bottom:6px;">Organisch vs. Google Ads Hebel</div>
+                <p style="font-size:0.88rem; color:#E2E8F0; margin:0; line-height:1.4;">
+                    Organische Spitzenpositionen benötigen Monate. Mit <strong>Google Search Ads</strong> sichert sich {data['clean_biz_name']} ab Tag 1 die Spitzenplätze bei kaufbereiten Entscheidern.
+                </p>
+            </div>
+            <div style="font-size:0.85rem; color:#E2E8F0; line-height:1.6;">
+                <div>— <strong style="color:#C8D400;">Kaufabsicht sichern:</strong> Relevante Suchbegriffe direkt auf 14-Tage Conversion-Landingpages leiten.</div>
+                <div>— <strong style="color:#C8D400;">Speed-to-Market:</strong> Google Ads als sofortiger Umsatzhebel, während die organische Autorität wächst.</div>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
+        # 4. Experten-Empfehlung strikt am Ende
         st.markdown(f"""
         <div class="blueprint-container">
             <div class="blueprint-title">STRAIGHTADS EXPERTEN-EMPFEHLUNG: GOOGLE ADS & SICHTBARKEIT</div>
@@ -1752,98 +1913,89 @@ else:
 
     # ---------------- TAB 3: DESIGN & UI/UX VISION ----------------
     with tab3:
-        # ZONE 1: HERO / FIRST-FOLD SNAPSHOT & BRAND STATUS (First Fold)
-        st.markdown(f"""
+        # 1. Visueller Markenauftritt & Snapshot
+        st.markdown("""
         <div class="section-card">
             <div class="section-card-header">
-                <div class="section-card-title">📱 VISUELLER MARKENAUFTRITT & FIRST-FOLD SNAPSHOT</div>
+                <div class="section-card-title">VISUELLER MARKENAUFTRITT & FIRST-FOLD SNAPSHOT</div>
                 <div class="section-card-badge">Design & Layout</div>
             </div>
-            <div style="display:grid; grid-template-columns:1fr 1.3fr; gap:20px; align-items:center;">
-                <div>
         """, unsafe_allow_html=True)
         if data.get("screenshot_bytes"):
             st.image(data["screenshot_bytes"], caption=f"Website-Snapshot ({data['domain']})", use_container_width=True)
-            if st.button("🔍 Screenshot im Vollbild-Overlay öffnen", key="tab3_modal_btn", use_container_width=True):
-                show_site_modal(data["screenshot_bytes"], data["domain"], data["url"])
         else:
             st.info("Kein Screenshot verfügbar.")
             
-        st.markdown(f"""
-                </div>
-                <div style="background:#14181F; border:1px solid #2D333F; border-radius:8px; padding:20px;">
-                    <div style="font-size:0.78rem; text-transform:uppercase; color:#C8D400; font-weight:700; letter-spacing:0.8px; margin-bottom:8px;">Visuelle Wahrnehmung in den ersten 3 Sekunden</div>
-                    <p style="font-size:0.90rem; color:#E2E8F0; line-height:1.5; margin:0 0 12px 0;">
-                        68 % aller Mobilbesucher verlassen eine Website sofort, wenn Schriften schwer lesbar sind, Kontraste fehlen oder der Einstieg optisch unruhig wirkt.
-                    </p>
-                    <div style="font-size:0.82rem; color:#A0AAB5; border-top:1px solid #252B37; padding-top:10px;">
-                        ✓ <strong>CI-Farben & Typografie isoliert</strong> &bull; ✓ <strong>Gemini 1.5 Flash Vision analysiert</strong>
-                    </div>
+        st.markdown("""
+            <div style="background:#14181F; border:1px solid #2D333F; border-radius:8px; padding:18px; margin-top:14px;">
+                <div style="font-size:0.78rem; text-transform:uppercase; color:#C8D400; font-weight:700; letter-spacing:0.8px; margin-bottom:8px;">Visuelle Wahrnehmung in den ersten 3 Sekunden</div>
+                <p style="font-size:0.90rem; color:#E2E8F0; line-height:1.5; margin:0 0 10px 0;">
+                    68 % aller Mobilbesucher verlassen eine Website sofort, wenn Schriften schwer lesbar sind, Kontraste fehlen oder der Einstieg optisch unruhig wirkt.
+                </p>
+                <div style="font-size:0.82rem; color:#A0AAB5; border-top:1px solid #252B37; padding-top:10px;">
+                    <strong>CI-Farben & Typografie isoliert</strong> &bull; <strong>Gemini 1.5 Flash Vision analysiert</strong>
                 </div>
             </div>
         </div>
         """, unsafe_allow_html=True)
 
-        # ZONE 2: STRUKTURIERTE DETAIL-EBENE (2 Spalten)
-        col_v_d1, col_v_d2 = st.columns(2)
-        with col_v_d1:
-            color_list = data["design_assets"].get("colors", [])
-            font_list = data["design_assets"].get("fonts", [])
-            
-            color_swatches = "".join([
-                f'<div style="background:#14181F; border:1px solid #2D333F; border-radius:6px; overflow:hidden; text-align:center;"><svg width="100%" height="48" style="display:block; background-color:{hex_val};"><rect width="100%" height="100%" fill="{hex_val}"/></svg><div style="font-size:0.75rem; font-weight:bold; padding:6px 0; color:#FFFFFF; font-family:monospace;">{hex_val}</div></div>'
-                for hex_val in color_list[:5]
-            ])
-            font_pills = " ".join([
-                f'<span style="background:rgba(200,212,0,0.1); border:1px solid rgba(200,212,0,0.3); color:#C8D400; padding:4px 10px; border-radius:12px; font-size:0.80rem; font-weight:bold; margin-right:6px;">{f_name}</span>'
-                for f_name in font_list[:3]
-            ])
-            
-            st.markdown(f"""
-            <div class="section-card" style="height:100%;">
-                <div class="section-card-header">
-                    <div class="section-card-title">[ 01 ] CI-FARBPALETTE & TYPOGRAFIE</div>
-                    <div class="section-card-badge">Corporate Design</div>
-                </div>
-                <div style="font-size:0.78rem; text-transform:uppercase; color:#A0AAB5; font-weight:700; margin-bottom:8px;">Extrahierte Farbpalette</div>
-                <div style="display:grid; grid-template-columns:repeat(5, 1fr); gap:8px; margin-bottom:16px;">
-                    {color_swatches}
-                </div>
-                <div style="font-size:0.78rem; text-transform:uppercase; color:#A0AAB5; font-weight:700; margin-bottom:8px;">Erkannte Schriftarten</div>
-                <div style="margin-bottom:14px;">
-                    {font_pills if font_pills else '<span style="color:#FFFFFF;">System Sans-Serif</span>'}
-                </div>
-                <div style="font-size:0.85rem; color:#E2E8F0; line-height:1.6;">
-                    <div>⮞ <strong style="color:#C8D400;">Signalwirkung:</strong> Klare Abgrenzung von Hintergrund-, Fließtext- und Aktionsfarben.</div>
-                    <div>⮞ <strong style="color:#C8D400;">Lesbarkeit:</strong> Schriften für maximale Lesegeschwindigkeit auf Smartphones optimiert.</div>
-                </div>
+        # 2. [ 01 ] CI-Farbpalette & Typografie
+        color_list = data["design_assets"].get("colors", [])
+        font_list = data["design_assets"].get("fonts", [])
+        color_swatches = "".join([
+            f'<div style="background:#14181F; border:1px solid #2D333F; border-radius:6px; overflow:hidden; text-align:center;"><svg width="100%" height="48" style="display:block; background-color:{hex_val};"><rect width="100%" height="100%" fill="{hex_val}"/></svg><div style="font-size:0.75rem; font-weight:bold; padding:6px 0; color:#FFFFFF; font-family:monospace;">{hex_val}</div></div>'
+            for hex_val in color_list[:5]
+        ])
+        font_pills = " ".join([
+            f'<span style="background:rgba(200,212,0,0.1); border:1px solid rgba(200,212,0,0.3); color:#C8D400; padding:4px 10px; border-radius:12px; font-size:0.80rem; font-weight:bold; margin-right:6px;">{f_name}</span>'
+            for f_name in font_list[:3]
+        ])
+        
+        st.markdown(f"""
+        <div class="section-card">
+            <div class="section-card-header">
+                <div class="section-card-title">[ 01 ] CI-FARBPALETTE & TYPOGRAFIE</div>
+                <div class="section-card-badge">Corporate Design</div>
             </div>
-            """, unsafe_allow_html=True)
-
-        with col_v_d2:
-            v = data.get("vision_result") or {}
-            st.markdown(f"""
-            <div class="section-card" style="height:100%;">
-                <div class="section-card-header">
-                    <div class="section-card-title">[ 02 ] MULTIMODALES UI/UX-AUDIT (GEMINI VISION)</div>
-                    <div class="section-card-badge">KI-Sichtprüfung</div>
-                </div>
-                <div class="audit-box-success" style="margin-bottom:14px; padding:14px 16px;">
-                    <strong style="color:#FFFFFF; font-size:0.85rem;">1. Lesbarkeit & Abstände:</strong>
-                    <p style="margin:2px 0 8px 0; color:#E2E8F0; font-size:0.82rem;">{v.get('layout_clipping', 'Layout-Abstände und Weißraum im gesunden Bereich.')}</p>
-                    <strong style="color:#FFFFFF; font-size:0.85rem;">2. Mobile Ansicht & Navigation:</strong>
-                    <p style="margin:2px 0 8px 0; color:#E2E8F0; font-size:0.82rem;">{v.get('mobile_alignment', 'Mobile Navigation ist strukturiert und erreichbar.')}</p>
-                    <strong style="color:#FFFFFF; font-size:0.85rem;">3. Kontraste & Hierarchie:</strong>
-                    <p style="margin:2px 0 0 0; color:#E2E8F0; font-size:0.82rem;">{v.get('typography_contrast', 'Kontraste der Schriften heben sich gut ab.')}</p>
-                </div>
-                <div style="font-size:0.85rem; color:#E2E8F0; line-height:1.6;">
-                    <div>⮞ <strong style="color:#C8D400;">First-Fold Klarheit:</strong> Kernaussage und USP direkt ohne Scrollen erfassbar.</div>
-                    <div>⮞ <strong style="color:#C8D400;">Daumen-Zone:</strong> Wichtige Buttons liegen ergonomisch in der mobilen Klick-Zone.</div>
-                </div>
+            <div style="font-size:0.78rem; text-transform:uppercase; color:#A0AAB5; font-weight:700; margin-bottom:8px;">Extrahierte Farbpalette</div>
+            <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(120px, 1fr)); gap:8px; margin-bottom:16px;">
+                {color_swatches}
             </div>
-            """, unsafe_allow_html=True)
+            <div style="font-size:0.78rem; text-transform:uppercase; color:#A0AAB5; font-weight:700; margin-bottom:8px;">Erkannte Schriftarten</div>
+            <div style="margin-bottom:14px;">
+                {font_pills if font_pills else '<span style="color:#FFFFFF;">System Sans-Serif</span>'}
+            </div>
+            <div style="font-size:0.85rem; color:#E2E8F0; line-height:1.6;">
+                <div>— <strong style="color:#C8D400;">Signalwirkung:</strong> Klare Abgrenzung von Hintergrund-, Fließtext- und Aktionsfarben.</div>
+                <div>— <strong style="color:#C8D400;">Lesbarkeit:</strong> Schriften für maximale Lesegeschwindigkeit auf Smartphones optimiert.</div>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
 
-        # ZONE 3: ABSCHLUSS (StraightAds Blueprint)
+        # 3. [ 02 ] Multimodales UI/UX-Audit (Gemini Vision)
+        v = data.get("vision_result") or {}
+        st.markdown(f"""
+        <div class="section-card">
+            <div class="section-card-header">
+                <div class="section-card-title">[ 02 ] MULTIMODALES UI/UX-AUDIT (GEMINI VISION)</div>
+                <div class="section-card-badge">KI-Sichtprüfung</div>
+            </div>
+            <div class="audit-box-success" style="margin-bottom:14px; padding:14px 16px;">
+                <strong style="color:#FFFFFF; font-size:0.85rem;">1. Lesbarkeit & Abstände:</strong>
+                <p style="margin:2px 0 8px 0; color:#E2E8F0; font-size:0.82rem;">{v.get('layout_clipping', 'Layout-Abstände und Weißraum im gesunden Bereich.')}</p>
+                <strong style="color:#FFFFFF; font-size:0.85rem;">2. Mobile Ansicht & Navigation:</strong>
+                <p style="margin:2px 0 8px 0; color:#E2E8F0; font-size:0.82rem;">{v.get('mobile_alignment', 'Mobile Navigation ist strukturiert und erreichbar.')}</p>
+                <strong style="color:#FFFFFF; font-size:0.85rem;">3. Kontraste & Hierarchie:</strong>
+                <p style="margin:2px 0 0 0; color:#E2E8F0; font-size:0.82rem;">{v.get('typography_contrast', 'Kontraste der Schriften heben sich gut ab.')}</p>
+            </div>
+            <div style="font-size:0.85rem; color:#E2E8F0; line-height:1.6;">
+                <div>— <strong style="color:#C8D400;">First-Fold Klarheit:</strong> Kernaussage und USP direkt ohne Scrollen erfassbar.</div>
+                <div>— <strong style="color:#C8D400;">Daumen-Zone:</strong> Wichtige Buttons liegen ergonomisch in der mobilen Klick-Zone.</div>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
+        # 4. Experten-Empfehlung strikt am Ende
         st.markdown(f"""
         <div class="blueprint-container">
             <div class="blueprint-title">STRAIGHTADS EXPERTEN-EMPFEHLUNG: MARKENAUFTRITT & DESIGN</div>
@@ -1853,20 +2005,17 @@ else:
 
     # ---------------- TAB 4: VERKAUFSPSYCHOLOGIE (BJ-FOGG) ----------------
     with tab4:
-        # ZONE 1: HERO / CONVERSION HEALTH SCORE & FOGG-DIAGNOSE (First Fold)
-        st.markdown("""
+        # 1. Conversion Health Score & Fogg-Diagnose
+        st.markdown(f"""
         <div class="section-card">
             <div class="section-card-header">
-                <div class="section-card-title">🧠 CONVERSION HEALTH SCORE & FOGG-DIAGNOSE</div>
+                <div class="section-card-title">CONVERSION HEALTH SCORE & FOGG-DIAGNOSE</div>
                 <div class="section-card-badge">B = M × A × T</div>
             </div>
-        """, unsafe_allow_html=True)
-        col_rad, col_fogg_diag = st.columns([1, 1.35])
-        with col_rad:
-            st.markdown(render_radial_health_score(data["health_score"], data["grade"], data["grade_desc"]), unsafe_allow_html=True)
-        with col_fogg_diag:
-            st.markdown(f"""
-            <div style="background:#14181F; border:1px solid #2D333F; padding:20px; border-radius:8px; height:100%;">
+            <div style="display:flex; justify-content:center; margin-bottom:16px;">
+                {render_radial_health_score(data["health_score"], data["grade"], data["grade_desc"])}
+            </div>
+            <div style="background:#14181F; border:1px solid #2D333F; padding:18px 20px; border-radius:8px;">
                 <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
                     <span style="font-size:0.80rem; text-transform:uppercase; color:#A0AAB5; font-weight:700;">Branchen-Einordnung:</span>
                     <span class="badge-status badge-ok">{fogg.get('business_model', 'Dienstleistungen')}</span>
@@ -1876,21 +2025,20 @@ else:
                     Besucher entscheiden in den ersten 3 Sekunden. Ist Motivation vorhanden, aber Hürden (Ability) stehen im Weg oder klare Auslöser (Trigger) fehlen, verpufft der Traffic wirkungslos.
                 </p>
                 <div style="font-size:0.80rem; color:#A0AAB5; border-top:1px solid #252B37; padding-top:8px;">
-                    ⮞ <strong style="color:#C8D400;">Health Score Fazit:</strong> Starke Basis mit Hebeln in der mobilen Aktionsführung.
+                    — <strong style="color:#C8D400;">Health Score Fazit:</strong> Starke Basis mit Hebeln in der mobilen Aktionsführung.
                 </div>
             </div>
-            """, unsafe_allow_html=True)
-        st.markdown("</div>", unsafe_allow_html=True)
+        </div>
+        """, unsafe_allow_html=True)
 
-        # ZONE 2: STRUKTURIERTE DETAIL-EBENE (4 fokussierte Cards)
-        # Card 1: Die 3 Säulen
+        # 2. [ 01 ] Die 3 Säulen der Conversion-Psychologie
         st.markdown(f"""
         <div class="section-card">
             <div class="section-card-header">
                 <div class="section-card-title">[ 01 ] DIE 3 SÄULEN DER CONVERSION-PSYCHOLOGIE</div>
                 <div class="section-card-badge">Ist vs. Hebel</div>
             </div>
-            <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:14px;">
+            <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:14px;">
                 <div style="background:#14181F; border:1px solid #2D333F; border-top:4px solid #C8D400; padding:16px; border-radius:8px;">
                     <strong style="color:#C8D400; font-size:0.90rem;">1. Motivation (Verlangen)</strong>
                     <p style="font-size:0.80rem; color:#A0AAB5; margin:6px 0 2px 0;"><strong>Ist:</strong> {fogg.get('motivation_ist', '')}</p>
@@ -1910,14 +2058,14 @@ else:
         </div>
         """, unsafe_allow_html=True)
 
-        # Card 2: 3 Headline-Hooks
+        # 3. [ 02 ] 3 Spezifische Headline-Hooks
         st.markdown(f"""
         <div class="section-card">
             <div class="section-card-header">
                 <div class="section-card-title">[ 02 ] 3 SPEZIFISCHE HEADLINE-HOOKS (NUTZEN-POSITIONIERUNG)</div>
                 <div class="section-card-badge">Copywriting-Optionen</div>
             </div>
-            <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:14px;">
+            <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:14px;">
                 <div style="background:#14181F; border:1px solid rgba(200,212,0,0.25); padding:16px; border-radius:8px;">
                     <span style="font-size:0.78rem; color:#C8D400; font-weight:bold;">Option 1: {fogg.get('cat_1', 'ROI & Nutzen')}</span>
                     <p style="font-size:0.92rem; color:#FFFFFF; margin:6px 0 0 0; font-weight:600; line-height:1.4;">{fogg.get('hook_1', '')}</p>
@@ -1934,7 +2082,7 @@ else:
         </div>
         """, unsafe_allow_html=True)
 
-        # Card 3: Button-Optimierung
+        # 4. [ 03 ] Button-Optimierung
         cta_rows = fogg.get("cta_comparison", [])
         if cta_rows:
             table_rows = "".join([
@@ -1961,7 +2109,7 @@ else:
             </div>
             """, unsafe_allow_html=True)
 
-        # Card 4: Neuro-Psychologie
+        # 5. [ 04 ] Angewandte Neuro-Psychologie
         biz_name = data["clean_biz_name"]
         st.markdown(f"""
         <div class="section-card">
@@ -1969,7 +2117,7 @@ else:
                 <div class="section-card-title">[ 04 ] STRAIGHTADS MARKETING BRAIN • ANGEWANDTE NEURO-PSYCHOLOGIE</div>
                 <div class="section-card-badge">23 Wissensmodule &bull; Live-Transfer</div>
             </div>
-            <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; font-size:0.85rem; color:#E2E8F0; line-height:1.5;">
+            <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:16px; font-size:0.85rem; color:#E2E8F0; line-height:1.5;">
                 <div style="background:#14181F; border:1px solid #252B37; padding:14px 16px; border-radius:8px; display:flex; flex-direction:column; justify-content:space-between;">
                     <div>
                         <strong style="color:#C8D400; font-size:0.92rem;">1. BJ-Fogg Verhaltensmodell (B = M × A × T)</strong>
@@ -1978,7 +2126,7 @@ else:
                         </p>
                     </div>
                     <div style="background:#0E1116; border-left:3px solid #C8D400; padding:10px 12px; border-radius:4px; margin-top:6px;">
-                        <strong style="color:#C8D400; font-size:0.78rem; text-transform:uppercase; letter-spacing:0.5px;">⚡ Konkreter Hebel für {biz_name}:</strong><br>
+                        <strong style="color:#C8D400; font-size:0.78rem; text-transform:uppercase; letter-spacing:0.5px;">Hebel für {biz_name}:</strong><br>
                         <span style="color:#FFFFFF; font-size:0.84rem; line-height:1.45;">{fogg.get('brain_fogg_example', '')}</span>
                     </div>
                 </div>
@@ -1990,7 +2138,7 @@ else:
                         </p>
                     </div>
                     <div style="background:#0E1116; border-left:3px solid #C8D400; padding:10px 12px; border-radius:4px; margin-top:6px;">
-                        <strong style="color:#C8D400; font-size:0.78rem; text-transform:uppercase; letter-spacing:0.5px;">⚡ Konkreter Hebel für {biz_name}:</strong><br>
+                        <strong style="color:#C8D400; font-size:0.78rem; text-transform:uppercase; letter-spacing:0.5px;">Hebel für {biz_name}:</strong><br>
                         <span style="color:#FFFFFF; font-size:0.84rem; line-height:1.45;">{fogg.get('brain_restorff_example', '')}</span>
                     </div>
                 </div>
@@ -2002,7 +2150,7 @@ else:
                         </p>
                     </div>
                     <div style="background:#0E1116; border-left:3px solid #FFA500; padding:10px 12px; border-radius:4px; margin-top:6px;">
-                        <strong style="color:#FFA500; font-size:0.78rem; text-transform:uppercase; letter-spacing:0.5px;">⚡ Konkreter Hebel für {biz_name}:</strong><br>
+                        <strong style="color:#FFA500; font-size:0.78rem; text-transform:uppercase; letter-spacing:0.5px;">Hebel für {biz_name}:</strong><br>
                         <span style="color:#FFFFFF; font-size:0.84rem; line-height:1.45;">{fogg.get('brain_loss_example', '')}</span>
                     </div>
                 </div>
@@ -2014,7 +2162,7 @@ else:
                         </p>
                     </div>
                     <div style="background:#0E1116; border-left:3px solid #FFA500; padding:10px 12px; border-radius:4px; margin-top:6px;">
-                        <strong style="color:#FFA500; font-size:0.78rem; text-transform:uppercase; letter-spacing:0.5px;">⚡ Konkreter Hebel für {biz_name}:</strong><br>
+                        <strong style="color:#FFA500; font-size:0.78rem; text-transform:uppercase; letter-spacing:0.5px;">Hebel für {biz_name}:</strong><br>
                         <span style="color:#FFFFFF; font-size:0.84rem; line-height:1.45;">{fogg.get('brain_journey_example', '')}</span>
                     </div>
                 </div>
@@ -2022,7 +2170,7 @@ else:
         </div>
         """, unsafe_allow_html=True)
 
-        # ZONE 3: ABSCHLUSS (StraightAds Blueprint)
+        # 6. Experten-Empfehlung strikt am Ende
         st.markdown(f"""
         <div class="blueprint-container">
             <div class="blueprint-title">STRAIGHTADS EXPERTEN-EMPFEHLUNG: VERKAUFSPSYCHOLOGIE & CRO</div>
@@ -2032,63 +2180,66 @@ else:
 
     # ---------------- TAB 5: ROI RECHNER ----------------
     with tab5:
-        # ZONE 1: HERO / DER FINANZIELLE HEBEL-EFFEKT (First Fold)
-        rc1, rc2 = st.columns([1, 1.15])
-        with rc1:
-            st.markdown("""
-            <div class="section-card" style="height:100%;">
-                <div class="section-card-header">
-                    <div class="section-card-title">[ 01 ] BUSINESS-STELLSCHRAUBEN</div>
-                    <div class="section-card-badge">Echtzeit-Regler</div>
-                </div>
-            """, unsafe_allow_html=True)
-            visitors = st.number_input("Monatliche Website-Besucher:", value=6000, step=500)
-            curr_cr = st.slider("Aktuelle Abschlussquote (in %):", min_value=0.2, max_value=6.0, value=1.5, step=0.1)
-            basket_value = st.number_input("Durchschnittlicher Kundenwert / Bon (in EUR):", value=25, step=5)
-            cr_lift = st.slider("Mögliche Steigerung durch Optimierung (+%-Punkte):", min_value=0.1, max_value=2.0, value=0.5, step=0.1)
-            
-            cur_rev = (visitors * curr_cr / 100) * basket_value
-            opt_cr = curr_cr + cr_lift
-            opt_rev = (visitors * opt_cr / 100) * basket_value
-            delta_rev = opt_rev - cur_rev
-            delta_annual = delta_rev * 12
-            new_customers_monthly = int(visitors * cr_lift / 100)
-            
-            st.markdown(f"""
-                <div style="font-size:0.82rem; color:#E2E8F0; line-height:1.5; margin-top:14px;">
-                    ⮞ <strong style="color:#C8D400;">Mathematischer Hebel:</strong> Steigerung von {curr_cr:.1f}% auf {opt_cr:.1f}% = <strong>+{((cr_lift/curr_cr)*100):.1f}% Mehrabschlüsse</strong>.
-                </div>
+        # 1. [ 01 ] Business-Stellschrauben (Inputs oben)
+        st.markdown("""
+        <div class="section-card">
+            <div class="section-card-header">
+                <div class="section-card-title">[ 01 ] BUSINESS-STELLSCHRAUBEN</div>
+                <div class="section-card-badge">Echtzeit-Regler</div>
             </div>
-            """, unsafe_allow_html=True)
+        """, unsafe_allow_html=True)
+        
+        visitors = st.number_input("Monatliche Website-Besucher:", value=6000, step=500)
+        curr_cr = st.slider("Aktuelle Abschlussquote (in %):", min_value=0.2, max_value=6.0, value=1.5, step=0.1)
+        basket_value = st.number_input("Durchschnittlicher Kundenwert / Bon (in EUR):", value=25, step=5)
+        cr_lift = st.slider("Mögliche Steigerung durch Optimierung (+%-Punkte):", min_value=0.1, max_value=2.0, value=0.5, step=0.1)
+        
+        cur_rev = (visitors * curr_cr / 100) * basket_value
+        opt_cr = curr_cr + cr_lift
+        opt_rev = (visitors * opt_cr / 100) * basket_value
+        delta_rev = opt_rev - cur_rev
+        delta_annual = delta_rev * 12
+        new_customers_monthly = int(visitors * cr_lift / 100)
+        
+        delta_annual_formatted = format_eur_de(delta_annual)
+        delta_rev_formatted = format_eur_de(delta_rev)
+        new_cust_formatted = format_number_de(new_customers_monthly)
+        
+        st.markdown(f"""
+            <div style="font-size:0.82rem; color:#E2E8F0; line-height:1.5; margin-top:14px; border-top:1px solid #252B37; padding-top:10px;">
+                — <strong style="color:#C8D400;">Mathematischer Hebel:</strong> Steigerung von {curr_cr:.1f}% auf {opt_cr:.1f}% = <strong>+{((cr_lift/curr_cr)*100):.1f}% Mehrabschlüsse</strong>.
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
 
-        with rc2:
-            st.markdown(f"""
-            <div class="section-card" style="height:100%;">
-                <div class="section-card-header">
-                    <div class="section-card-title">[ 02 ] DER FINANZIELLE JAHRES-HEBEL</div>
-                    <div class="section-card-badge">100% Reine Marge</div>
-                </div>
-                <div class="roi-card" style="margin:0;">
-                    <div style="font-size:0.80rem; text-transform:uppercase; color:#A0AAB5; font-weight:700;">Zusätzlicher Jahresertrag (Ohne Werbekosten-Plus)</div>
-                    <h2 style="margin:6px 0 10px 0; color:#C8D400; font-size:2.4rem; line-height:1;">+ {delta_annual:,.2f} EUR</h2>
-                    <div style="background:#14181F; border:1px solid #2D333F; border-radius:6px; padding:10px 14px; margin-bottom:12px; font-size:0.85rem; color:#E2E8F0;">
-                        <div style="display:flex; justify-content:space-between; margin-bottom:4px;">
-                            <span>Monatlicher Mehrumsatz:</span>
-                            <strong style="color:#C8D400;">+ {delta_rev:,.2f} EUR / Monat</strong>
-                        </div>
-                        <div style="display:flex; justify-content:space-between;">
-                            <span>Zusätzliche Kunden pro Monat:</span>
-                            <strong style="color:#FFFFFF;">+ {new_customers_monthly} Neukunden</strong>
-                        </div>
+        # 2. [ 02 ] Der finanzielle Jahres-Hebel (Ergebnis prominent darunter)
+        st.markdown(f"""
+        <div class="section-card">
+            <div class="section-card-header">
+                <div class="section-card-title">[ 02 ] DER FINANZIELLE JAHRES-HEBEL</div>
+                <div class="section-card-badge">Reine Conversion-Effizienz</div>
+            </div>
+            <div class="roi-card" style="margin:0;">
+                <div style="font-size:0.80rem; text-transform:uppercase; color:#A0AAB5; font-weight:700; letter-spacing:0.8px;">Zusätzlicher Jahresertrag (Ohne Werbekosten-Plus)</div>
+                <div class="roi-result-value">+ {delta_annual_formatted}</div>
+                <div style="background:#14181F; border:1px solid #2D333F; border-radius:6px; padding:14px 18px; margin-bottom:14px; font-size:0.88rem; color:#E2E8F0;">
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                        <span>Monatlicher Mehrumsatz:</span>
+                        <strong style="color:#C8D400; font-size:0.95rem;">+ {delta_rev_formatted} / Monat</strong>
                     </div>
-                    <p style="margin:0; font-size:0.82rem; color:#A0AAB5; line-height:1.4;">
-                        ⮞ <strong>Amortisation:</strong> Das StraightAds-System finanziert sich durch den Hebel meist schon im ersten Quartal von selbst.
-                    </p>
+                    <div style="display:flex; justify-content:space-between; align-items:center;">
+                        <span>Zusätzliche Kunden pro Monat:</span>
+                        <strong style="color:#FFFFFF; font-size:0.95rem;">+ {new_cust_formatted} Neukunden</strong>
+                    </div>
                 </div>
+                <p style="margin:0; font-size:0.82rem; color:#A0AAB5; line-height:1.4;">
+                    — <strong>Amortisation:</strong> Das StraightAds-System finanziert sich durch den Hebel meist schon im ersten Quartal von selbst.
+                </p>
             </div>
-            """, unsafe_allow_html=True)
+        </div>
+        """, unsafe_allow_html=True)
 
-        # ZONE 3: ABSCHLUSS (StraightAds Blueprint)
+        # 3. Experten-Empfehlung strikt am Ende
         st.markdown(f"""
         <div class="blueprint-container">
             <div class="blueprint-title">STRAIGHTADS EXPERTEN-EMPFEHLUNG: WIRTSCHAFTLICHKEIT & SKALIERUNG</div>
@@ -2110,14 +2261,14 @@ else:
             health_score=data["health_score"]
         )
         
-        # ZONE 1: HERO / DIE 2 DOMINANTEN SALES-HEBEL (First Fold)
+        # 1. Die 2 dominanten Sales-Hebel
         st.markdown(f"""
         <div class="section-card">
             <div class="section-card-header">
-                <div class="section-card-title">🎯 DIE 2 DOMINANTEN GESPRÄCHSAUFHÄNGER (COLD OUTREACH)</div>
+                <div class="section-card-title">DIE 2 DOMINANTEN GESPRÄCHSAUFHÄNGER (COLD OUTREACH)</div>
                 <div class="section-card-badge">Sales Ready</div>
             </div>
-            <div style="display:grid; grid-template-columns:1.2fr 1fr; gap:18px;">
+            <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:16px;">
                 <div style="background:#14181F; border:1px solid #2D333F; border-radius:8px; padding:16px;">
                     <div style="font-size:0.78rem; text-transform:uppercase; color:#FFA500; font-weight:700; margin-bottom:6px;">Konkrete Schmerzpunkte aus dem Audit</div>
                     <div style="font-size:0.88rem; color:#E2E8F0; margin-bottom:6px;">1. <strong>First-Fold Führung:</strong> Dominanter Haupt-CTA fehlt im ersten Smartphone-Sichtfeld.</div>
@@ -2132,25 +2283,25 @@ else:
         </div>
         """, unsafe_allow_html=True)
 
-        # ZONE 2: STRUKTURIERTE DETAIL-EBENE (Frameworks & Leitfäden)
+        # 2. [ 01 ] 3 Psychologische Copywriting-Frameworks
         st.markdown("""
         <div class="section-card">
             <div class="section-card-header">
-                <div class="section-card-title">[ 01 ] 🧠 3 PSYCHOLOGISCHE COPYWRITING-FRAMEWORKS</div>
+                <div class="section-card-title">[ 01 ] 3 PSYCHOLOGISCHE COPYWRITING-FRAMEWORKS</div>
                 <div class="section-card-badge">StraightAds Marketing Brain</div>
             </div>
         """, unsafe_allow_html=True)
         
         p_tab1, p_tab2, p_tab3 = st.tabs([
-            "📌 PAS (Problem - Agitate - Solution)",
-            "🌉 BAB (Before - After - Bridge)",
-            "🎣 Hook - Story - Offer (ABC-Outreach)"
+            "PAS (Problem - Agitate - Solution)",
+            "BAB (Before - After - Bridge)",
+            "Hook - Story - Offer (ABC-Outreach)"
         ])
         
         with p_tab1:
             pas = pitches["pas"]
             st.markdown(f"""
-            <div style="background:#14181F; border:1px solid #2D333F; border-left:4px solid #C8D400; padding:16px 18px; border-radius:8px;">
+            <div style="background:#14181F; border:1px solid #2D333F; border-left:4px solid #C8D400; padding:16px 18px; border-radius:8px; margin-top:8px;">
                 <div style="font-size:0.75rem; text-transform:uppercase; color:#C8D400; font-weight:bold; letter-spacing:0.5px;">PAS-Framework • Für lösungsorientierte Entscheider</div>
                 <div style="margin-top:10px;">
                     <strong style="color:#FFA500;">P (Problem):</strong><br>
@@ -2170,7 +2321,7 @@ else:
         with p_tab2:
             bab = pitches["bab"]
             st.markdown(f"""
-            <div style="background:#14181F; border:1px solid #2D333F; border-left:4px solid #FFA500; padding:16px 18px; border-radius:8px;">
+            <div style="background:#14181F; border:1px solid #2D333F; border-left:4px solid #FFA500; padding:16px 18px; border-radius:8px; margin-top:8px;">
                 <div style="font-size:0.75rem; text-transform:uppercase; color:#FFA500; font-weight:bold; letter-spacing:0.5px;">BAB-Framework • Für Visions- und Transformations-Pitches</div>
                 <div style="margin-top:10px;">
                     <strong style="color:#A0AAB5;">B (Before / Ist-Zustand):</strong><br>
@@ -2190,7 +2341,7 @@ else:
         with p_tab3:
             hso = pitches["hso"]
             st.markdown(f"""
-            <div style="background:#14181F; border:1px solid #2D333F; border-left:4px solid #C8D400; padding:16px 18px; border-radius:8px;">
+            <div style="background:#14181F; border:1px solid #2D333F; border-left:4px solid #C8D400; padding:16px 18px; border-radius:8px; margin-top:8px;">
                 <div style="font-size:0.75rem; text-transform:uppercase; color:#C8D400; font-weight:bold; letter-spacing:0.5px;">Hook-Story-Offer • Für Kaltakquise, E-Mail & Social Outreach</div>
                 <div style="margin-top:10px;">
                     <strong style="color:#FFA500;">Hook (Aufmerksamkeits-Stopper):</strong><br>
@@ -2206,29 +2357,32 @@ else:
                 </div>
             </div>
             """, unsafe_allow_html=True)
+            
         st.markdown("</div>", unsafe_allow_html=True)
 
+        # 3. [ 02 ] Telefon-Leitfaden
         st.markdown("""
         <div class="section-card">
             <div class="section-card-header">
-                <div class="section-card-title">[ 02 ] 📞 TELEFON-LEITFADEN (COLD OUTREACH)</div>
+                <div class="section-card-title">[ 02 ] TELEFON-LEITFADEN (COLD OUTREACH)</div>
                 <div class="section-card-badge">Erstkontakt</div>
             </div>
         """, unsafe_allow_html=True)
         st.code(pitches["phone_script"], language="text")
         st.markdown("</div>", unsafe_allow_html=True)
         
+        # 4. [ 03 ] Personalisierte E-Mail-Vorlage
         st.markdown("""
         <div class="section-card">
             <div class="section-card-header">
-                <div class="section-card-title">[ 03 ] ✉️ PERSONALISIERTE E-MAIL-VORLAGE (ZAHNRAD-METHODE)</div>
+                <div class="section-card-title">[ 03 ] PERSONALISIERTE E-MAIL-VORLAGE (ZAHNRAD-METHODE)</div>
                 <div class="section-card-badge">Schlüsselfertig</div>
             </div>
         """, unsafe_allow_html=True)
         st.code(pitches["email_pitch"], language="text")
         st.markdown("</div>", unsafe_allow_html=True)
 
-        # ZONE 3: ABSCHLUSS (StraightAds Blueprint)
+        # 5. Experten-Empfehlung strikt am Ende
         st.markdown(f"""
         <div class="blueprint-container">
             <div class="blueprint-title">STRAIGHTADS EXPERTEN-EMPFEHLUNG: VERTRIEBSANSATZ & ABSCHLUSS</div>
@@ -2266,32 +2420,32 @@ else:
         
         json_str = json.dumps(export_dict, indent=2, ensure_ascii=False)
         
-        # ZONE 1: HERO & DOWNLOAD HUB (First Fold)
+        # 1. Download Hub
         st.markdown("""
         <div class="section-card">
             <div class="section-card-header">
-                <div class="section-card-title">📋 STRUKTURIERTER AUDIT-REPORT (CRM & ONBOARDING EXPORT)</div>
+                <div class="section-card-title">STRUKTURIERTER AUDIT-REPORT (CRM & ONBOARDING EXPORT)</div>
                 <div class="section-card-badge">JSON Format</div>
             </div>
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px; flex-wrap:wrap; gap:10px;">
                 <div style="font-size:0.88rem; color:#E2E8F0;">
                     Vollständig strukturierter Datensatz für den nahtlosen Import in <strong>HubSpot, Pipedrive oder Notion</strong>.
                 </div>
                 <div style="display:flex; gap:8px;">
-                    <span class="badge-status badge-ok">✓ CRM-Ready</span>
-                    <span class="badge-status badge-ok">✓ 14-Tage Onboarding</span>
+                    <span class="badge-status badge-ok">CRM-Ready</span>
+                    <span class="badge-status badge-ok">14-Tage Onboarding</span>
                 </div>
             </div>
         """, unsafe_allow_html=True)
         st.download_button(
-            label="💾 Audit als JSON-Datei herunterladen",
+            label="Audit als JSON-Datei herunterladen",
             data=json_str,
             file_name=f"straightads_audit_{data['domain']}.json",
             mime="application/json"
         )
         st.markdown("</div>", unsafe_allow_html=True)
         
-        # ZONE 2: STRUKTURIERTER JSON-VIEWER
+        # 2. Strukturierter JSON-Viewer
         st.markdown("""
         <div class="section-card">
             <div class="section-card-header">
